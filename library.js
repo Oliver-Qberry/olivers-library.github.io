@@ -640,6 +640,9 @@ window.addEventListener('keydown', (e) => {
                 alert('Invalid number');
             }
         }
+        else{
+            search();
+        }
     }
 });
 searchButtonImage.addEventListener('click', search);
