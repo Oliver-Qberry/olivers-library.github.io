@@ -88,7 +88,11 @@
         </div>
     </div>
 
-    <script type="module" src="./library.js"></script>
+    <script src="./library.js"></script>
+    <script type="module">
+        import data from './books.JSON' assert { type: 'json' };
+        console.log(data);
+    </script>
     <style>
         #logo {
             width: 100px;
