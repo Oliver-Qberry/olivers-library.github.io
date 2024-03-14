@@ -1,5 +1,5 @@
-import data from './books.JSON' assert { type: 'json' };
-console.log(data);
+//import data from './books.JSON' assert { type: 'json' };
+//console.log(data);
 //Also make a class for books
 
 // Organize this mess        PLEASE
