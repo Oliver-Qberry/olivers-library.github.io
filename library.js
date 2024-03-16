@@ -1,5 +1,5 @@
 import data from './users.JSON' with { type: 'json' };
-console.log(data);
+console.log(data.name);
 //Also make a class for books
 
 // Organize this mess        PLEASE
