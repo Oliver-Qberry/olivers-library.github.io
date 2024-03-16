@@ -1,4 +1,4 @@
-import data from './books.JSON' assert { type: 'json' };
+import data from './users.JSON' with { type: 'json' };
 console.log(data);
 //Also make a class for books
 
