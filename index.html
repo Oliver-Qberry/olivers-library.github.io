@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Oliver's Library</title>
+    <link rel="icon" type="image/x-icon" href="./logo.png">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./tabs-style.css">
+</head>
+
+<body>
+    <div class="banner">
+        <img src="./logo.png" id="logo">
+        <h1 class="welcome">Oliver's Library</h1>
+        <input type="string" class="bookSearch" name="searchBar" placeholder="Search"></input>
+        <button class="searchImageButton" hidden> <img src="search.png" width="40px" height="40px"></button>
+    </div>
+    <div class="custom-cursor">
+        <div class="book"></div>
+    </div>
+    <div class="content">
+        <input type="text" id="cardNumberInput" name="cardNumber" placeholder="Card Number" inputmode="numeric"><br>
+        <button class="login">Login</button>
+        <div class="wrapper" hidden>
+            <div class="tabs">
+                <div role="tablist" aria-label="Actions">
+                    <button role="tab" aria-selected="true" id="account">
+                        Account
+                    </button>
+                    <button role="tab" aria-selected="false" id="checkout">
+                        Checkout
+                    </button>
+                    <button role="tab" aria-selected="false" id="users">
+                        Users
+                    </button>
+                    <button role="tab" , aria-selected="false" id="addNewBook">
+                        Add new Book
+                    </button>
+                    <button role="tab" aria-selected="false" id="return">
+                        Return
+                    </button>
+                    <button role="tab" aria-selected="false" id="search">
+                        Search
+                    </button>
+                </div>
+                <div role="tabpanel" aria-labelledby="account">
+                    <p class="name"></p>
+                    <p class="checkedout"></p>
+                    <p class="history"></p>
+                    <p class="holds"></p>
+                    <button class="exit">Exit</button>
+                </div>
+                <div role="tabpanel" aria-labelledby="checkout" hidden>
+                    <p>These are all the currently available books.</p>
+                    <div class="cards"></div>
+                </div>
+                <div role="tabpanel" aria-labelledby="users" hidden>
+                    <input type="text" id="newUserName" name="newUserNameInput" placeholder="Name"><br>
+                    <input type="number" id="newUserNumber" name="newUserNumberInput" placeholder="Number"><br>
+                    <button class="addUser">Add</button>
+                </div>
+                <div role="tabpanel" aria-labelledby="addNewBook" hidden>
+                    <input type="text" id="bookTitle" name="bookTitleInput" placeholder="Book Title"><br>
+                    <input type="text" id="bookAuthor" name="bookAuthorInput" placeholder="Book Author"><br>
+                    <input type="text" id="bookGenre" name="bookGenreInput" placeholder="Book Genre"><br>
+                    <input type="number" id="bookPublication" name="bookPublicationInput" placeholder="Book Publication Year"><br>
+                    <button class="addBook">Add</button>
+                </div>
+                <div role="tabpanel" aria-labelledby="return" hidden>
+                    What book would you like to return? <br>
+                </div>
+                <div role="tabpanel" aria-labelledby="search" hidden>
+                    <h2>Results for: </h2>
+                    <div class="cards">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-outer">
+            <div class="modal-inner">
+                <button class="checkoutButton">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./library.js"></script>
+    <style>
+        .cornnerBanner {
+            /*adds a space at top that needs to be fixed*/
+	        width: 250px;
+	        padding: 15px;
+	        background-color: #11afee;
+	        color: #fff;
+	        text-align: center;
+	        transform: rotate(45deg) translate(31%, -90%);
+	        box-shadow: 0px 5px 5px rgba(0,0,0,0.4);
+	        text-transform: uppercase;
+	        text-shadow: 0 2px 2px rgba(0,0,0,0.4);
+        }
+
+        #logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        .welcome {
+            display: inline-block;
+            color: white;
+            /*margin-top: 50;*/
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-gap: 15px;
+            padding: 15px;
+        }
+
+        .card {
+            background: white;
+            padding: 1rem;
+            border-radius: 7px;
+            max-width: 315px;
+            margin: 15;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            /*width: 150px;
+	        height: 150px;
+	        position: absolute;
+	        top: -5px;
+	        left: -5px;*/
+            overflow: hidden;
+	        &:after {
+		        content: "";
+        		display: block;
+		        width: 10px;
+        		height: 5px;
+		        background-color: darken(#76AB1E, 5%);
+        		position: absolute;
+		        top: 0;
+        		right: 0;
+		        z-index: -1;
+	        }
+	        &:before {
+		        content: "";
+        		display: block;
+        		height: 10px;
+        		width: 5px;
+        		background-color: darken(#76AB1E, 5%);
+        		position: absolute;
+        		bottom: 0;
+        		left: 0;
+        		z-index: -1;
+        	}
+        }
+
+        .modal-outer {
+            display: grid;
+            /*background: hsla(50, 100%, 50%, 0.7);*/
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            top: 0;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            /* Hide this modal until we need it */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .modal-outer img {
+            width: 100%;
+        }
+
+        .modal-outer.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-inner {
+            max-width: 600px;
+            min-width: 400px;
+            padding: 2rem;
+            border-radius: 5px;
+            min-height: 200px;
+            margin-top:125px;
+            background: white;
+            /*background: hlsa(41, 100, 49, 1);    not working??*/
+            transform: translateY(-200%);
+            transition: transform 2s;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .modal-outer.open .modal-inner {
+            transform: translateY(0);
+        }
+
+        /*the two below are not working*/
+        #cardNumberInput {
+            padding-left: 10px;
+            border-radius: 5px;
+            margin-left:10px;
+            margin-top: 105px;
+        }
+
+        .login {
+            padding-left: 10px;
+            margin-left:10px;
+        }
+
+        .bookSearch {
+            position: absolute;
+            top: 50px;
+            right: 85px;
+            /*height: 45px;
+            width: 90px;*/
+            padding-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .search {
+            padding-left: 10px;
+            display: inline-block;
+        }
+
+        .banner {
+            width: 100%;
+            height: 110px;
+            background-color: #ffc600;
+            /* Choose your preferred color */
+            color: #fff;
+            /* Text color */
+            padding: 10px;
+            /* Adjust padding as needed */
+            position: fixed;
+            /* Fix the position */
+            top: 0;
+            /* Align to the top of the viewport */
+            left: 0;
+            /* Align to the left */
+            z-index: 999;
+            /* Ensure the banner is on top of other content */
+
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            /*border: 0;
+            color: black;
+            border-radius: 5px 5px 0 0;
+            --bs-color: rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 -2px 5px var(--bs-color);*/
+        }
+
+        .searchImageButton{
+            position:absolute;
+            top: 50px;
+            right:20px;
+            width: 45px;
+            height: 45px;
+            padding: 1px;
+        }
+
+        /*scroll bar*/
+        /*:root {
+            --dark-bg-color: rgb(44, 53, 77);
+            --light-bg-color: rgb(163, 204, 228);
+            --red-accent: #ff5277;
+            --red-accent-hover: #ff6b92;
+            --red-inverted: #00ad88;
+            --red-hover-inverted: #00946d;
+            --blue: #0072B9;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--red-inverted);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--light-bg-color);
+        }
+
+        ::selection {
+            background: #535353;
+        }*/
+    </style>
+</body>
+
+</html>

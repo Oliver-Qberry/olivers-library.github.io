@@ -1,0 +1,86 @@
+/*body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}*/
+
+.tabs {
+  display: grid;
+}
+
+[role="tablist"] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px;
+}
+
+[role="tabpanel"] {
+  background: var(--yellow);
+  padding: 2rem;
+}
+
+button[role=tab] {
+  background: var(--grey);
+  border: 0;
+  color: black;
+  border-radius: 5px 5px 0 0;
+  --bs-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 -2px 5px var(--bs-color);
+  /*cursor: none;*/
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  padding-top: 60px;
+  /*cursor: none;*/
+}
+
+/*.custom-cursor {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+}
+
+.book {*/
+/*width: 100%;
+  height: 100%;
+  background-image: url('logo.png');
+  /* Replace 'book.png' with the path to your book icon */
+/*background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;*/
+/* Center the background image */
+/*width: 100%;
+  height: 100%;
+  cursor: url('logo.png') 0 0, auto;
+}*/
+
+/*html:hover .custom-cursor {
+  display: block;
+  /* Show the custom cursor when hovering anywhere on the screen */
+/*}*/
+
+button[aria-selected="true"] {
+  background: var(--yellow);
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+button:focus {
+  outline: 0;
+  --bs-color: rgba(0, 0, 0, 0.6);
+}
+
+/*button,
+input {
+  cursor: none;
+}*/
