@@ -310,7 +310,7 @@ users.push(kamiClass);
 var jackClass = new userClass('Jack', 6145835, JSON.parse(localStorage.getItem('jackCurrent')), JSON.parse(localStorage.getItem('jackPast')), JSON.parse(localStorage.getItem('jackHolds')));
 users.push(jackClass);
 
-var karlaClass = new userClass('Karla', 728166567, JSON.parse(localStorage.getItem('karlaCurrent')), JSON.parse(localStorage.getItem('karlaPast')), JSON.parse(localStorage.getItem('karlaHolds')));
+var karlaClass = new userClass('Karla', 7281600006567, JSON.parse(localStorage.getItem('karlaCurrent')), JSON.parse(localStorage.getItem('karlaPast')), JSON.parse(localStorage.getItem('karlaHolds')));
 users.push(karlaClass);
 
 var oliverClass = new userClass('Oliver', 1973, JSON.parse(localStorage.getItem('oliverCurrent')), JSON.parse(localStorage.getItem('oliverPast')), JSON.parse(localStorage.getItem('oliverHolds')), true);
