@@ -775,9 +775,10 @@ function setUp(){
             <h3>More changes can be found <a href="https://github.com/Oliver-Qberry/olivers-library.github.io">here</a> under the version_changes.txt file</h3>
         `;
         
-        modalInner.style.minwidth = "70%";
-        modalInner.style.maxwidth = "80%";
-        modalInner.style.maxwidth = "15%";
+        modalInner.style.minwidth = "200px";
+        modalInner.style.maxwidth = "350px";
+        modalInner.style.maxheight = "400px";
+        modalInner.style.marginbottom = "100px";
         // show the modal
         modalOuter.classList.add('open');
         //console.log(`width: ${modalInner.getBoundingClientRect().width} height:${modalInner.getBoundingClientRect().height}`);
