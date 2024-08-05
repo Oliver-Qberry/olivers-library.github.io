@@ -87,7 +87,7 @@
         </div>
 
         <div class="modal-outer">
-            <div class="modal-inner">
+            <div class="modal-inner" scrolling="auto">
                 <button class="checkoutButton">Checkout</button>
             </div>
         </div>
@@ -192,17 +192,24 @@
         }
 
         .modal-inner {
+            /*position: fixed;*/
             max-width: 600px;
+            /*400px*/
             min-width: 400px;
+            overflow-y: scroll;
+
             padding: 2rem;
             border-radius: 5px;
-            min-height: 200px;
-            margin-top: 125px;
+            min-height: 300px;
+            max-height: 500px;
+            margin-top: 130px;
             background: white;
             /*background: hlsa(41, 100, 49, 1);    not working??*/
             transform: translateY(-200%);
             transition: transform 2s;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            /*custom*/
+
         }
 
         .modal-outer.open .modal-inner {
