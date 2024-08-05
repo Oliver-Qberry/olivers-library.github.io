@@ -423,7 +423,7 @@ function saveUserData() {
     localStorage.setItem('oliverPast', stringifySafe(oliverClass.getPast()));
     localStorage.setItem('oliverHolds', stringifySafe(oliverClass.getHolds()));
 
-    //localStorage.setItem('version', version);
+    localStorage.setItem('version', version);
 
     console.log('User data saved.');
 }
@@ -767,6 +767,7 @@ function setUp(){
                 <li>Added a few new books</li>
                 <li>Switched Checkout to Browse</li>
                 <li>Minor changes to the layout of the top banner</li>
+                <li>Added this update information and got it some what usable on mobile</li>
                 <li>Changed the way the "Learn more" buttons handle clicks, so they all ways work</li>
                 <li>Set up a check to see what type of device user is using</li>
                 <li>Started on the beta version of mobile layout</li>
