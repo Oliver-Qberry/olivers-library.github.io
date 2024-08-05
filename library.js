@@ -423,7 +423,7 @@ function saveUserData() {
     localStorage.setItem('oliverPast', stringifySafe(oliverClass.getPast()));
     localStorage.setItem('oliverHolds', stringifySafe(oliverClass.getHolds()));
 
-    localStorage.setItem('version', version);
+    //localStorage.setItem('version', version);
 
     console.log('User data saved.');
 }
@@ -774,9 +774,13 @@ function setUp(){
             </ul>
             <h3>More changes can be found <a href="https://github.com/Oliver-Qberry/olivers-library.github.io">here</a> under the version_changes.txt file</h3>
         `;
-
+        
+        modalInner.style.minwidth = "70%";
+        modalInner.style.maxwidth = "80%";
+        modalInner.style.maxwidth = "15%";
         // show the modal
         modalOuter.classList.add('open');
+        //console.log(`width: ${modalInner.getBoundingClientRect().width} height:${modalInner.getBoundingClientRect().height}`);
     }
 }
 
