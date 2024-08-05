@@ -1,16 +1,13 @@
 // import data from 'books.JSON' assert { type: 'json' };
 // console.log(data);
 
-// Organize this mess        PLEASE
-// Write some more documentation
-//add recomended
-
+let version ='1.0.1';
 
 const loginButton = document.querySelector('.login');
 const cardNumberInput = document.getElementById("cardNumberInput");
 var user;
 let books = [];
-const librarian = ["The Three-Body Problem", "Finding Orion", "The Six of Crows", "The Star Shepherd", "The Lifters", "Ivory and Bone", "The List", "Looking for Alaska", "Look Out for the Little Guy", "The Bicycle Spy", "An Ember in the Ashes", "Children of Time", "I am the Messenger"]; 
+const librarian = ["The Three-Body Problem", "Finding Orion", "The Six of Crows", "The Star Shepherd", "The Lifters", "Ivory and Bone", "The List", "Looking for Alaska", "Look Out for the Little Guy", "The Bicycle Spy", "An Ember in the Ashes", "Children of Time", "I am the Messenger", "Starling House", "The Wonderful Story of Henry Sugar and Six More"]; 
 const div = document.querySelector('.wrapper');
 const tabs = document.querySelector('.tabs');
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
@@ -25,16 +22,20 @@ const searchTabPanel = tabPanels.find(
 const returnTabPanel = tabPanels.find(
     (panel) => panel.getAttribute('aria-labelledby') === 'return',
 );
-const checkoutTabPanel = tabPanels.find(
-    (panel) => panel.getAttribute('aria-labelledby') === 'checkout',
+const browseTabPanel = tabPanels.find(
+    (panel) => panel.getAttribute('aria-labelledby') === 'browse',
 );
 
+let deviceType = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile': 'Desktop'; //should be const
 
 const searchBar = document.querySelector('.bookSearch');
 searchBar.style.display = "none";
 const searchButtonImage = document.querySelector('.searchImageButton');
+const searchForm = document.querySelector('.searchForm');
+const stackButton = document.querySelector('.stackImageButton');
 //account panel
 const nameP = document.querySelector('.name');
+let deviceP = document.querySelector('.device');
 const checkedoutP = document.querySelector('.checkedout');
 const historyP = document.querySelector('.history');
 const holdsP = document.querySelector('.holds');
@@ -49,6 +50,9 @@ const addUserButton = document.querySelector('.addUser');
 const cardButtons = document.querySelectorAll('.card button');
 const modalOuter = document.querySelector('.modal-outer');
 const modalInner = document.querySelector('.modal-inner');
+
+//Mobile
+const sidePanel = document.querySelector('.sidePanel');
 
 /*function checkImage(imageSrc) {
     let result;
@@ -93,25 +97,68 @@ function sortBooks() {
     books = sorted;
 }
 
+function setMobile() {
+    //tab and search do not work while in mobile mode - tab does not nessisarilly need to work
+    alert('Mobile use is still under development. For the best view and function it is recommended to use on desktop');
+    tabButtons.forEach(function(tabButton){
+        tabButton.role ='tabMobile';
+        sidePanel.appendChild(tabButton);  
+    })
+    stackButton.hidden = false;
+}
 
-// Sets up the tabs
+
+// half done
+function generateRecomended(){
+    let recomended = [];
+    // create array of objects that is the genres and times they have checked out
+    let genres = [];
+    let past = user.getPast();
+    for(let i = 0; i < past.length; i++){// switch to for each
+        //for each genre on that book increment that genre or create if its the first     refere to sarcastic genorator maybe 
+        let booksGenres = findBook(past[i]).genres
+        for(let g = 0; g < booksGenres.length; g++){
+            // does it exist
+            let genreObject;
+            genres.forEach(function(genreF) {
+                if(genreF.name === booksGenres[g]){
+                    genreObject = genreF;
+                    //break; // exit for each
+                }
+            });
+            if(genres.find((g) => g.name === booksGenres[g])){
+
+            }else {
+                //create it
+                genres.push({name: booksGenres[g], num: 1});
+            }
+        }
+    }
+    //.map?? or filter would be better
+
+    //for top 1/3 of thier genres find other books that share that genre and they havent checked out
+    //display those books
+}
+
+
 /**
  * Sets up the account tab with the user's information
  */
 function setUserTab() {
     // Sets HTML paragraphs to display on the account page
     nameP.textContent = `Name: ${user.getName()}`;
+    deviceP.textContent = `Device: ${deviceType}`;
     checkedoutP.textContent = `Currently Checkedout: ${arrayToString(user.getCurrent())}`;
     historyP.textContent = `History: ${arrayToString(user.getPast())}`;
     holdsP.textContent = `Holds: ${arrayToString(user.getHolds())}`;
 }
 /**
- * Sets up the checkout tab with a card for each book that is not currently checked out
+ * Sets up the browse tab with a card for each book that is not currently checked out
  */
-function setCheckoutTab(){
-    // Clears checkout tab panel
-    checkoutTabPanel.querySelector('.cards').innerHTML = '';
-    // Sets checkout tab panel
+function setBrowseTab(){
+    // Clears browse tab panel
+    browseTabPanel.querySelector('.cards').innerHTML = '';
+    // Sets browse tab panel
     for(let b = 0; b < books.length; b++ ){
         if(books[b].available === true){
             //check if image exists
@@ -122,15 +169,10 @@ function setCheckoutTab(){
             code += `
                 <img class="bookCover" width="151" height="225" alt="Book cover for ${books[b].title}" src="Book images/${books[b].title.toLowerCase()}.jpg">
                 <h2>${books[b].title}</h2>
-                <button>Learn more →</button>
+                <button value="${books[b].title}">Learn more →</button>
             </div>`;
-            checkoutTabPanel.querySelector('.cards').insertAdjacentHTML('beforeend', code);
+            browseTabPanel.querySelector('.cards').insertAdjacentHTML('beforeend', code);
         }
-    }
-    const cardButtons = checkoutTabPanel.querySelectorAll('.card button');  // Move so we have more access to it in a bigger scope
-    //sets up buttons for books
-    for(let buttonsNum = 0; buttonsNum < cardButtons.length; buttonsNum++){
-        cardButtons[buttonsNum].addEventListener('click', handleCardButtonClick);
     }
     //const bookCovers = document.querySelectorAll('.bookCover');
     /*bookCovers.forEach(function() {
@@ -146,8 +188,8 @@ function setReturnTab(){
     // Sets up the return tab panel
     returnTabPanel.innerHTML = '';
     returnTabPanel.insertAdjacentHTML('beforeend', '<p>What book would you like to return?</p>'); // increase font size for this
-    if (user.getCurrent() !== null) {
-        if(user.getCurrent().length !== 0){4
+    if (user.getCurrent() !== null && user.getCurrent().length !== 0) {
+        if(user.getCurrent().length !== 0){
             for (let i = 0; i < user.getCurrent().length; i++) {
                 const bookTitle = user.getCurrent()[i];
                 //Need to add padding or margins to these buttons
@@ -381,6 +423,8 @@ function saveUserData() {
     localStorage.setItem('oliverPast', stringifySafe(oliverClass.getPast()));
     localStorage.setItem('oliverHolds', stringifySafe(oliverClass.getHolds()));
 
+    localStorage.setItem('version', version);
+
     console.log('User data saved.');
 }
 
@@ -395,7 +439,7 @@ function checkout(book) {
         user.getCurrent().push(book);
         console.log(`${book} has been checkedout to ${user.getName()}`);
         setUserTab();
-        setCheckoutTab();
+        setBrowseTab();
         setReturnTab();
         closeModal();
         alert(books[findBook(book)].title + getDueDate());
@@ -437,7 +481,7 @@ function returnBook(bookTitle) {
     if (buttonToRemove) {
         buttonToRemove.remove();
     }
-    setCheckoutTab();
+    setBrowseTab();
 
     if(user.getCurrent().length === 0){
         returnTabPanel.insertAdjacentHTML('beforeend', '<p>You currently have no books checked out.</p>');
@@ -480,12 +524,12 @@ function newUser(name, num=Math.random()*10000){
  * Finds all books that fit with the search bar input and then creates a card form them
  * then displays the cards on the search tab
  */
-function search(){
+function search(e){
     const searchString = searchBar.value;
     const searchDiv = searchTabPanel.querySelector('.cards');
     searchDiv.innerHTML = '';
     const results = searchTabPanel.querySelector('h2');
-    
+    e.preventDefault();
 
     // sets search page
     results.innerHTML = `<h2>Results for: ${searchString}</h2>`;
@@ -499,15 +543,10 @@ function search(){
             code += `
                 <img class="bookCover" width="151" height="225" alt="Book cover for ${books[b].title}" src="Book images/${books[b].title.toLowerCase()}.jpg">
                 <h2>${books[b].title}</h2>
-                <button>Learn more →</button>
+                <button value="${books[b].title}">Learn more →</button>
             </div>`;
             searchDiv.insertAdjacentHTML('beforeend', code);
         }
-    }
-    const cardButtonsSearch = document.querySelectorAll('.learnSearch');  // Move so we have more access to it in a bigger scope
-    //sets up buttons for books
-    for(let buttonsNum = 0; buttonsNum < cardButtonsSearch.length; buttonsNum++){
-        cardButtonsSearch[buttonsNum].addEventListener('click', handleCardButtonClick);
     }
 
 
@@ -527,13 +566,6 @@ function search(){
     searchTab.setAttribute('aria-selected', true);
     // find the associated tabpanel and show it
     searchTabPanel.hidden = false;
-
-
-    const cardButtons = checkoutTabPanel.querySelectorAll('.card button');  // Move so we have more access to it in a bigger scope
-    //sets up buttons for books
-    for(let buttonsNum = 0; buttonsNum < cardButtons.length; buttonsNum++){
-        cardButtons[buttonsNum].addEventListener('click', handleCardButtonClick);
-    }
 }
 
 
@@ -618,35 +650,25 @@ function sortArray(arrayToSort){
 
 /**
  * Sets up and activates the modal
- * @param {Event} event The click of a button
+ * @param {String} title The title of the book on the same card as the button that was clicked
  */
-function handleCardButtonClick(event) {
-    const button = event.currentTarget;
-    let card = button.closest('.card');
-    if(card === null){
-        console.log(card);
-        card = button.closest('.card');
-        console.log('Search');
-    }
-    const name = card.querySelector('h2').textContent;
+function handleCardButtonClick(title) {
     let availability = "Out";
-    if(books[findBook(name)].available){
+    if(books[findBook(title)].available){
         availability = 'Available';
     }
     // populate the modal with the new info
     modalInner.innerHTML = `
-        <h1>${name}</h1>
-        <h2>By: ${books[findBook(name)].author}</h2>
-        <h2>Published in ${books[findBook(name)].publication}</h2>
-        <h2>Genres: ${arrayToString(books[findBook(name)].genre)}</h2>
+        <h1>${title}</h1>
+        <h2>By: ${books[findBook(title)].author}</h2>
+        <h2>Published in ${books[findBook(title)].publication}</h2>
+        <h2>Genres: ${arrayToString(books[findBook(title)].genre)}</h2>
         <h2>${availability}</h2>
         <button class="checkoutButton">Checkout</button>
     `;
-    //debugger;
-    const checkoutButton = document.querySelector(`.checkoutButton`); // Where does this button come from
-    //debugger;
+    const checkoutButton = document.querySelector(`.checkoutButton`);
     checkoutButton.addEventListener('click', function(){
-        checkout(name);
+        checkout(title);
     });
     // show the modal
     modalOuter.classList.add('open');
@@ -674,6 +696,9 @@ function handleTabClick(event) {
       (panel) => panel.getAttribute('aria-labelledby') === id,
     );
     tabPanel.hidden = false;
+
+    //for mobile
+    sidePanel.hidden = true;
 }
 
 /**
@@ -682,6 +707,7 @@ function handleTabClick(event) {
 function closeModal() {
     modalOuter.classList.remove('open');
 }
+
 
 /**
  * The main function, called on start of program, gets current user
@@ -696,6 +722,8 @@ function setUp(){
         return (aTitle).compare(bTitle); //not working
     });*/
     console.log(`Welcome ${user.getName()}`);
+    console.log(deviceType);
+
     cardNumberInput.style.display = "none"; 
     loginButton.hidden = true;
     div.hidden = false;
@@ -725,7 +753,31 @@ function setUp(){
     }
     setUserTab();
     setReturnTab();
-    setCheckoutTab();
+    setBrowseTab();
+
+    if(deviceType === 'Mobile'){
+        setMobile();
+    }
+
+    if(localStorage.getItem('version') !== version){
+        console.log('changes have been made since last opened');
+        modalInner.innerHTML = `
+            <h1>Version: ${version} changes</h1>
+            <ul>
+                <li>Added a few new books</li>
+                <li>Switched Checkout to Browse</li>
+                <li>Minor changes to the layout of the top banner</li>
+                <li>Changed the way the "Learn more" buttons handle clicks, so they all ways work</li>
+                <li>Set up a check to see what type of device user is using</li>
+                <li>Started on the beta version of mobile layout</li>
+                <li>Started working on custom recommendations based on books previously read</li>
+            </ul>
+            <h3>More changes can be found <a href="https://github.com/Oliver-Qberry/olivers-library.github.io">here</a> under the version_changes.txt file</h3>
+        `;
+
+        // show the modal
+        modalOuter.classList.add('open');
+    }
 }
 
 
@@ -760,14 +812,14 @@ window.addEventListener('keydown', (e) => {
                 alert('Invalid number');
             }
         }
-        else{
+        /*else{
             search();
-        }
+        }*/
     }
     else if (e.key === 'Escape') {
         closeModal();
     }
-    else if(e.key === "Tab"  /*|| e.keyCode === 9*/){
+    else if(e.key === "Tab"){
         e.preventDefault();
         let selectedTab; //Selected tab's id
         tabButtons.forEach((tab) => {
@@ -779,7 +831,7 @@ window.addEventListener('keydown', (e) => {
         //changes based on admin tabs
         if(!user.admin){//is this right?
             //create an array of the ids in order
-            const tabIds = ["account", "checkout","return","search"]; //others?
+            const tabIds = ["account", "return", "browse", "search"]; //others?
             //find id for next one
             let idnum = 0;
             for(let t = 0; t<tabIds.length; t++){
@@ -814,7 +866,7 @@ window.addEventListener('keydown', (e) => {
         }
         else{
             //create an array of the ids in order
-            const tabIds = ["account", "checkout","users", "addNewBook","return","search"]; //others?
+            const tabIds = ["account", "return", "browse", "users", "addNewBook", "search"]; //others?
             //find id for next one
             let idnum = 0;
             for(let t = 0; t<tabIds.length; t++){
@@ -848,6 +900,14 @@ window.addEventListener('keydown', (e) => {
             });
         }
     }
+    else if(e.code === "Space"){
+        e.preventDefault();
+        deviceType = 'Mobile'; //Temp
+        if(deviceType === 'Mobile'){
+            //sidePanel.hidden = !sidePanel.hidden;
+            setMobile();
+        }
+    }
 });
 // When image clicked search
 searchButtonImage.addEventListener('click', search);
@@ -877,7 +937,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 // New book button on new book tab
 addBookButton.addEventListener('click', function(){
-    //console.log(document.getElementById('bookTitle'));
     newBook(document.getElementById('bookTitle').value, document.getElementById('bookAuthor').value, document.getElementById('bookGenre').value.split(", "), document.getElementById('bookPublication').value);
 });
 // New user button on new user tab
@@ -894,6 +953,22 @@ window.addEventListener('beforeunload', function (e) {
     return;
 });
 
+searchTabPanel.addEventListener('click', function(event) {
+    if(event.target.matches('button')){
+        handleCardButtonClick(event.target.value);
+    }
+});
+browseTabPanel.addEventListener('click', function(event) {
+    if(event.target.matches('button')){
+        handleCardButtonClick(event.target.value);
+    }
+});
+
+searchForm.addEventListener('submit', search);
+
+stackButton.addEventListener('click', function(e) {
+    sidePanel.hidden = !sidePanel.hidden;
+});
 
 /**
  * Creates all the book objects
@@ -1772,6 +1847,13 @@ function setUpBooks() {
         author: 'Dan Haring and MarcyKate Connolly',
         genre: ['Fantasy', 'Fiction', 'Adventure', 'Science Fiction', 'Young Adult'],
         publication: 2019,
+        available: true,
+    });
+    books.push({
+        title: 'Starling House',
+        author: 'Alix E. Harrow',
+        genre: ['Fantasy Fiction', 'Gothic Fiction', 'Dark Fantasy', 'Contemporary Fantasy'],
+        publication: 2023,
         available: true,
     });
 
