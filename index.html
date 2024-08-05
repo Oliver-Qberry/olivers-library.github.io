@@ -13,10 +13,14 @@
 <body>
     <div class="banner">
         <img src="./logo.png" id="logo">
-        <h1 class="welcome">Oliver's Library</h1>
-        <input type="string" class="bookSearch" name="searchBar" placeholder="Search"></input>
-        <button class="searchImageButton" hidden> <img src="search.png" width="40px" height="40px"></button>
+        <h1 class="welcome">Oliver's<br>Library</h1>
+        <form class="searchForm"> <!--autocomplete="off" to turn off autocomplete-->
+            <input type="string" class="bookSearch" name="searchBar" placeholder="Search"></input>
+            <button class="searchImageButton" hidden> <img src="search.png" width="40px" height="40px"></button>
+        </form>
+        <button class="stackImageButton" hidden> <img src="stack.png" width="40px" height="40px"></button>
     </div>
+    <div class="sidePanel tablist" hidden></div>
     <div class="custom-cursor">
         <div class="book"></div>
     </div>
@@ -29,8 +33,11 @@
                     <button role="tab" aria-selected="true" id="account">
                         Account
                     </button>
-                    <button role="tab" aria-selected="false" id="checkout">
-                        Checkout
+                    <button role="tab" aria-selected="false" id="return">
+                        Return
+                    </button>
+                    <button role="tab" aria-selected="false" id="browse">
+                        Browse
                     </button>
                     <button role="tab" aria-selected="false" id="users">
                         Users
@@ -38,23 +45,21 @@
                     <button role="tab" , aria-selected="false" id="addNewBook">
                         Add new Book
                     </button>
-                    <button role="tab" aria-selected="false" id="return">
-                        Return
-                    </button>
                     <button role="tab" aria-selected="false" id="search">
                         Search
                     </button>
                 </div>
                 <div role="tabpanel" aria-labelledby="account">
                     <p class="name"></p>
+                    <p class="device"></p>
                     <p class="checkedout"></p>
                     <p class="history"></p>
                     <p class="holds"></p>
                     <button class="exit">Exit</button>
                 </div>
-                <div role="tabpanel" aria-labelledby="checkout" hidden>
+                <div role="tabpanel" aria-labelledby="browse" hidden>
                     <p>These are all the currently available books.</p>
-                    <div class="cards"></div>
+                    <div class="cards browseDiv"></div>
                 </div>
                 <div role="tabpanel" aria-labelledby="users" hidden>
                     <input type="text" id="newUserName" name="newUserNameInput" placeholder="Name"><br>
@@ -65,7 +70,8 @@
                     <input type="text" id="bookTitle" name="bookTitleInput" placeholder="Book Title"><br>
                     <input type="text" id="bookAuthor" name="bookAuthorInput" placeholder="Book Author"><br>
                     <input type="text" id="bookGenre" name="bookGenreInput" placeholder="Book Genre"><br>
-                    <input type="number" id="bookPublication" name="bookPublicationInput" placeholder="Book Publication Year"><br>
+                    <input type="number" id="bookPublication" name="bookPublicationInput"
+                        placeholder="Book Publication Year"><br>
                     <button class="addBook">Add</button>
                 </div>
                 <div role="tabpanel" aria-labelledby="return" hidden>
@@ -73,8 +79,8 @@
                 </div>
                 <div role="tabpanel" aria-labelledby="search" hidden>
                     <h2>Results for: </h2>
-                    <div class="cards">
-                        
+                    <div class="cards searchDiv">
+
                     </div>
                 </div>
             </div>
@@ -91,15 +97,15 @@
     <style>
         .cornnerBanner {
             /*adds a space at top that needs to be fixed*/
-	        width: 250px;
-	        padding: 15px;
-	        background-color: #11afee;
-	        color: #fff;
-	        text-align: center;
-	        transform: rotate(45deg) translate(31%, -90%);
-	        box-shadow: 0px 5px 5px rgba(0,0,0,0.4);
-	        text-transform: uppercase;
-	        text-shadow: 0 2px 2px rgba(0,0,0,0.4);
+            width: 250px;
+            padding: 15px;
+            background-color: #11afee;
+            color: #fff;
+            text-align: center;
+            transform: rotate(45deg) translate(31%, -90%);
+            box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+            text-transform: uppercase;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
         }
 
         #logo {
@@ -134,28 +140,30 @@
 	        top: -5px;
 	        left: -5px;*/
             overflow: hidden;
-	        &:after {
-		        content: "";
-        		display: block;
-		        width: 10px;
-        		height: 5px;
-		        background-color: darken(#76AB1E, 5%);
-        		position: absolute;
-		        top: 0;
-        		right: 0;
-		        z-index: -1;
-	        }
-	        &:before {
-		        content: "";
-        		display: block;
-        		height: 10px;
-        		width: 5px;
-        		background-color: darken(#76AB1E, 5%);
-        		position: absolute;
-        		bottom: 0;
-        		left: 0;
-        		z-index: -1;
-        	}
+
+            &:after {
+                content: "";
+                display: block;
+                width: 10px;
+                height: 5px;
+                background-color: darken(#76AB1E, 5%);
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: -1;
+            }
+
+            &:before {
+                content: "";
+                display: block;
+                height: 10px;
+                width: 5px;
+                background-color: darken(#76AB1E, 5%);
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                z-index: -1;
+            }
         }
 
         .modal-outer {
@@ -189,7 +197,7 @@
             padding: 2rem;
             border-radius: 5px;
             min-height: 200px;
-            margin-top:125px;
+            margin-top: 125px;
             background: white;
             /*background: hlsa(41, 100, 49, 1);    not working??*/
             transform: translateY(-200%);
@@ -205,25 +213,50 @@
         #cardNumberInput {
             padding-left: 10px;
             border-radius: 5px;
-            margin-left:10px;
+            margin-left: 10px;
             margin-top: 105px;
         }
 
         .login {
             padding-left: 10px;
-            margin-left:10px;
+            margin-left: 10px;
         }
 
         .bookSearch {
             position: absolute;
-            top: 50px;
-            right: 85px;
-            /*height: 45px;
-            width: 90px;*/
-            padding-bottom: 10px;
-            border-radius: 5px;
+            /*top: 50px;*/
+            right: 65px;
+            border-radius: 5px 0px 0px 5px;
         }
 
+        .searchImageButton {
+            position: absolute;
+            /*top: 50px;*/
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            padding: 1px;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        .searchForm {
+            position: absolute;
+            top: 50px;
+            right: 65px;
+            padding-bottom: 10px;
+        }
+
+        .stackImageButton {
+            position: absolute;
+            top: 50px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            padding: 1px;
+            border-radius: 5px 5px 5px 5px;
+        }
+
+        /*Tab panel*/
         .search {
             padding-left: 10px;
             display: inline-block;
@@ -256,14 +289,33 @@
             box-shadow: inset 0 -2px 5px var(--bs-color);*/
         }
 
-        .searchImageButton{
-            position:absolute;
-            top: 50px;
-            right:20px;
-            width: 45px;
-            height: 45px;
-            padding: 1px;
+        .sidePanel {
+            width: 300px;
+            height: 79%;
+            background-color: #ffffff;
+            /* Choose your preferred color */
+            color: #000000;
+            /* Text color */
+            padding: 10px;
+            /* Adjust padding as needed */
+            position: fixed;
+            /* Fix the position */
+            bottom: 0;
+            /* Align to the top of the viewport */
+            right: 0;
+            /* Align to the left */
+            z-index: 998;
+            /* Ensure the banner is on top of other content */
+
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            /*border: 0;
+            color: black;
+            border-radius: 5px 5px 0 0;
+            --bs-color: rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 -2px 5px var(--bs-color);*/
         }
+
 
         /*scroll bar*/
         /*:root {
