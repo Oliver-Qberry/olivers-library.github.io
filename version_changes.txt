@@ -1,0 +1,8 @@
+1.0.1
+    Added a few new books
+    Switched Checkout to Browse
+    Minor changes to the layout of the top banner
+    Changed the way the "Learn more" buttons handle clicks, so they all ways work
+    Set up a check to see what type of device user is using
+    Started on the beta version of mobile layout
+    Started working on custom recommendations based on books previously read
