@@ -1,0 +1,1300 @@
+[
+    {
+        "title": "The One and Only Ivan",
+        "author": "Katherine Applegate",
+        "genres": [
+            "Fiction",
+            "Fantasy"
+        ],
+        "publication": 2012,
+        "available": true
+    },
+    {
+        "title": "Finding Orion",
+        "author": "John David Anderson",
+        "genres": [
+            "Mystery",
+            "Adventure"
+        ],
+        "publication": 2019,
+        "available": true
+    },
+    {
+        "title": "Tuck Everlasting",
+        "author": "Natalie Babbitt",
+        "genres": [
+            "Fantasy",
+            "Romance"
+        ],
+        "publication": 1975,
+        "available": true
+    },
+    {
+        "title": "Shadow and Bone",
+        "author": "Leigh Bardugo",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2012,
+        "available": true
+    },
+    {
+        "title": "Siege and Storm",
+        "author": "Leigh Bardugo",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2013,
+        "available": true
+    },
+    {
+        "title": "Ruin and Rising",
+        "author": "Leigh Bardugo",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2014,
+        "available": true
+    },
+    {
+        "title": "The Six of Crows",
+        "author": "Leigh Bardugo",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2015,
+        "available": true
+    },
+    {
+        "title": "The Crooked Kingdom",
+        "author": "Leigh Bardugo",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2016,
+        "available": true
+    },
+    {
+        "title": "King of Scars",
+        "author": "Leigh Bardugo",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2019,
+        "available": true
+    },
+    {
+        "title": "Rule of Wolves",
+        "author": "Leigh Bardugo",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2021,
+        "available": true
+    },
+    {
+        "title": "Serafina and the Black Cloak",
+        "author": "Robert Beatty",
+        "genres": [
+            "Mystery",
+            "Fantasy"
+        ],
+        "publication": 2015,
+        "available": true
+    },
+    {
+        "title": "Serafina and the Twisted Staff",
+        "author": "Robert Beatty",
+        "genres": [
+            "Mystery",
+            "Fantasy"
+        ],
+        "publication": 2016,
+        "available": true
+    },
+    {
+        "title": "The Iron Trial",
+        "author": "Holly Black",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2014,
+        "available": true
+    },
+    {
+        "title": "The Copper Gauntlet",
+        "author": "Holly Black",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2015,
+        "available": true
+    },
+    {
+        "title": "The Bronze Key",
+        "author": "Holly Black",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2016,
+        "available": true
+    },
+    {
+        "title": "The Silver Mask",
+        "author": "Holly Black",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2017,
+        "available": true
+    },
+    {
+        "title": "The Golden Tower",
+        "author": "Holly Black",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2018,
+        "available": true
+    },
+    {
+        "title": "Henry Huggins",
+        "author": "Beverly Cleary",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1950,
+        "available": true
+    },
+    {
+        "title": "Ramona the Pest",
+        "author": "Beverly Cleary",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1968,
+        "available": true
+    },
+    {
+        "title": "Ramona and Her Father",
+        "author": "Beverly Cleary",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1977,
+        "available": true
+    },
+    {
+        "title": "Ramona and Her Mother",
+        "author": "Beverly Cleary",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1979,
+        "available": true
+    },
+    {
+        "title": "Ramona Forever",
+        "author": "Beverly Cleary",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1984,
+        "available": true
+    },
+    {
+        "title": "Ramona Quimby Age 8",
+        "author": "Beverly Cleary",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1981,
+        "available": true
+    },
+    {
+        "title": "The Mouse and the Motorcycle",
+        "author": "Beverly Cleary",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1965,
+        "available": true
+    },
+    {
+        "title": "Runaway Ralph",
+        "author": "Beverly Cleary",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1970,
+        "available": true
+    },
+    {
+        "title": "Ralph S. Mouse",
+        "author": "Beverly Cleary",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1982,
+        "available": true
+    },
+    {
+        "title": "The Ballad of Songbirds and Snakes",
+        "author": "Suzanne Collins",
+        "genres": [
+            "Science Fiction",
+            "Fantasy"
+        ],
+        "publication": 2020,
+        "available": true
+    },
+    {
+        "title": "The Hunger Games",
+        "author": "Suzanne Collins",
+        "genres": [
+            "Science Fiction",
+            "Adventure"
+        ],
+        "publication": 2008,
+        "available": true
+    },
+    {
+        "title": "Catching Fire",
+        "author": "Suzanne Collins",
+        "genres": [
+            "Science Fiction",
+            "Adventure"
+        ],
+        "publication": 2009,
+        "available": true
+    },
+    {
+        "title": "Mockingjay",
+        "author": "Suzanne Collins",
+        "genres": [
+            "Science Fiction",
+            "Adventure"
+        ],
+        "publication": 2010,
+        "available": true
+    },
+    {
+        "title": "Gregor the Overlander",
+        "author": "Suzanne Collins",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2003,
+        "available": true
+    },
+    {
+        "title": "Gregor and the Prophecy of Bane",
+        "author": "Suzanne Collins",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2004,
+        "available": true
+    },
+    {
+        "title": "Gregor and the Curse of the Warmbloods",
+        "author": "Suzanne Collins",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2005,
+        "available": true
+    },
+    {
+        "title": "Gregor and the Marks of Secret",
+        "author": "Suzanne Collins",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2006,
+        "available": true
+    },
+    {
+        "title": "Gregor and the Code of Claw",
+        "author": "Suzanne Collins",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2007,
+        "available": true
+    },
+    {
+        "title": "The Star Shepherd",
+        "author": "Dan Haring and MarcyKate Connolly",
+        "genres": [
+            "Fantasy",
+            "Fiction",
+            "Adventure",
+            "Science Fiction",
+            "Young Adult"
+        ],
+        "publication": 2019,
+        "available": true
+    },
+    {
+        "title": "The Wizards of Once",
+        "author": "Cressida Cowell",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2017,
+        "available": true
+    },
+    {
+        "title": "Twice Magic",
+        "author": "Cressida Cowell",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2018,
+        "available": true
+    },
+    {
+        "title": "Jurassic Park",
+        "author": "Michael Crichton",
+        "genres": [
+            "Science Fiction",
+            "Thriller"
+        ],
+        "publication": 1990,
+        "available": true
+    },
+    {
+        "title": "A Winter's Promise",
+        "author": "Christelle Dabos",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2013,
+        "available": true
+    },
+    {
+        "title": "Matilda",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1988,
+        "available": true
+    },
+    {
+        "title": "The BFG",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1982,
+        "available": true
+    },
+    {
+        "title": "Charlie and the Chocolate Factory",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1964,
+        "available": true
+    },
+    {
+        "title": "Fantastic Mr. Fox",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1970,
+        "available": true
+    },
+    {
+        "title": "George's Marvelous Medicine",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1981,
+        "available": true
+    },
+    {
+        "title": "James and the Giant Peach",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1961,
+        "available": true
+    },
+    {
+        "title": "The Magic Finger",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1966,
+        "available": true
+    },
+    {
+        "title": "The Twits",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1980,
+        "available": true
+    },
+    {
+        "title": "The Witches",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1983,
+        "available": true
+    },
+    {
+        "title": "The Wonderful Story of Henry Sugar and Six More",
+        "author": "Roald Dahl",
+        "genres": [
+            "Children's",
+            "Short Stories"
+        ],
+        "publication": 1977,
+        "available": true
+    },
+    {
+        "title": "Flora & Ulysses",
+        "author": "Kate DiCamillo",
+        "genres": [
+            "Children's",
+            "Adventure"
+        ],
+        "publication": 2013,
+        "available": true
+    },
+    {
+        "title": "The Lifters",
+        "author": "Dave Eggers",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2018,
+        "available": true
+    },
+    {
+        "title": "Ivory and Bone",
+        "author": "Julie Eshbaugh",
+        "genres": [
+            "Young Adult",
+            "Historical"
+        ],
+        "publication": 2016,
+        "available": true
+    },
+    {
+        "title": "Obsidian and Stars",
+        "author": "Julie Eshbaugh",
+        "genres": [
+            "Young Adult",
+            "Historical"
+        ],
+        "publication": 2017,
+        "available": true
+    },
+    {
+        "title": "The List",
+        "author": "Patricia Forde",
+        "genres": [
+            "Young Adult",
+            "Science Fiction"
+        ],
+        "publication": 2017,
+        "available": true
+    },
+    {
+        "title": "The Honest Truth",
+        "author": "Dan Gemeinhart",
+        "genres": [
+            "Children's",
+            "Adventure"
+        ],
+        "publication": 2015,
+        "available": true
+    },
+    {
+        "title": "Escape from Mr. Lemoncello's Library",
+        "author": "Chris Grabenstein",
+        "genres": [
+            "Children's",
+            "Mystery"
+        ],
+        "publication": 2013,
+        "available": true
+    },
+    {
+        "title": "I Funny",
+        "author": "James Patterson and Chris Grabenstein",
+        "genres": [
+            "Children's",
+            "Humor"
+        ],
+        "publication": 2012,
+        "available": true
+    },
+    {
+        "title": "The Matchstick Castle",
+        "author": "Keir Graff",
+        "genres": [
+            "Children's",
+            "Adventure"
+        ],
+        "publication": 2017,
+        "available": true
+    },
+    {
+        "title": "Looking for Alaska",
+        "author": "John Green",
+        "genres": [
+            "Young Adult",
+            "Fiction"
+        ],
+        "publication": 2005,
+        "available": true
+    },
+    {
+        "title": "The Glass Sentence",
+        "author": "S.E. Grove",
+        "genres": [
+            "Young Adult",
+            "Fantasy"
+        ],
+        "publication": 2014,
+        "available": true
+    },
+    {
+        "title": "The Magic Misfits",
+        "author": "Neil Patrick Harris",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2017,
+        "available": true
+    },
+    {
+        "title": "Starling House",
+        "author": "Alix E. Harrow",
+        "genres": [
+            "Fantasy Fiction",
+            "Gothic Fiction",
+            "Dark Fantasy",
+            "Contemporary Fantasy"
+        ],
+        "publication": 2023,
+        "available": true
+    },
+    {
+        "title": "Sal & Gabi Break the Universe",
+        "author": "Carlos Hernandez",
+        "genres": [
+            "Children's",
+            "Science Fiction"
+        ],
+        "publication": 2019,
+        "available": true
+    },
+    {
+        "title": "Redwall",
+        "author": "Brian Jacques",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1986,
+        "available": true
+    },
+    {
+        "title": "The Phantom Tollbooth",
+        "author": "Norton Juster",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1961,
+        "available": true
+    },
+    {
+        "title": "The Force Awakens",
+        "author": "Michael Kogge",
+        "genres": [
+            "Science Fiction",
+            "Fiction",
+            "Fantasy",
+            "Space Opera",
+            "Adventure",
+            "Novel",
+            "Star Wars"
+        ],
+        "publication": 2015,
+        "available": true
+    },
+    {
+        "title": "Restart",
+        "author": "Gordon Korman",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 2017,
+        "available": true
+    },
+    {
+        "title": "Look Out for the Little Guy",
+        "author": "Scott Lang",
+        "genres": [
+            "Humor",
+            "Fiction",
+            "Superhero",
+            "Autobiography"
+        ],
+        "publication": 2023,
+        "available": true
+    },
+    {
+        "title": "The Capture",
+        "author": "Kathryn Lasky",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2003,
+        "available": true
+    },
+    {
+        "title": "The Lion the Witch and the Wardrobe",
+        "author": "C.S. Lewis",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1950,
+        "available": true
+    },
+    {
+        "title": "Prince Caspian",
+        "author": "C.S. Lewis",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1951,
+        "available": true
+    },
+    {
+        "title": "The Voyage of the Dawn Treader",
+        "author": "C.S. Lewis",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1952,
+        "available": true
+    },
+    {
+        "title": "The Silver Chair",
+        "author": "C.S. Lewis",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1953,
+        "available": true
+    },
+    {
+        "title": "The Horse and His Boy",
+        "author": "C.S. Lewis",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1954,
+        "available": true
+    },
+    {
+        "title": "The Magician's Nephew",
+        "author": "C.S. Lewis",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1955,
+        "available": true
+    },
+    {
+        "title": "The Last Battle",
+        "author": "C.S. Lewis",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1956,
+        "available": true
+    },
+    {
+        "title": "The Three-Body Problem",
+        "author": "Cixin Liu",
+        "genres": [
+            "Science Fiction",
+            "Novel",
+            "Speculative Fiction",
+            "Chinese Science Fiction"
+        ],
+        "publication": 2008,
+        "available": true
+    },
+    {
+        "title": "The Dark Forest",
+        "author": "Cixin Liu",
+        "genres": [
+            "Science Fiction",
+            "Novel",
+            "Hard Science Fiction"
+        ],
+        "publication": 2008,
+        "available": true
+    },
+    {
+        "title": "Death's End",
+        "author": "Cixin Liu",
+        "genres": [
+            "Science Fiction",
+            "Hard Science Fiction"
+        ],
+        "publication": 2010,
+        "available": true
+    },
+    {
+        "title": "The Call of the Wild",
+        "author": "Jack London",
+        "genres": [
+            "Adventure",
+            "Fiction"
+        ],
+        "publication": 1903,
+        "available": true
+    },
+    {
+        "title": "Emperor of the Universe",
+        "author": "David Lubar",
+        "genres": [
+            "Humor",
+            "Science Fiction",
+            "Fiction"
+        ],
+        "publication": 2019,
+        "available": true
+    },
+    {
+        "title": "The Bicycle Spy",
+        "author": "Yona Zeldis McDonough",
+        "genres": [
+            "Children's",
+            "Historical"
+        ],
+        "publication": 2016,
+        "available": true
+    },
+    {
+        "title": "Legacy",
+        "author": "Shannon Messenger",
+        "genres": [
+            "Young Adult",
+            "Fantasy"
+        ],
+        "publication": 2019,
+        "available": true
+    },
+    {
+        "title": "Winnie the Pooh",
+        "author": "A.A. Milne",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 1926,
+        "available": true
+    },
+    {
+        "title": "Impyrium",
+        "author": "Henry H. Neff",
+        "genres": [
+            "Young Adult",
+            "Fantasy"
+        ],
+        "publication": 2016,
+        "available": true
+    },
+    {
+        "title": "The Stars Did Wander Darkling",
+        "author": "John D. Nesbitt",
+        "genres": [
+            "Science Fiction",
+            "Short Stories"
+        ],
+        "publication": 1978,
+        "available": true
+    },
+    {
+        "title": "Island of the Blue Dolphins",
+        "author": "Scott O'Dell",
+        "genres": [
+            "Children's",
+            "Adventure"
+        ],
+        "publication": 1960,
+        "available": true
+    },
+    {
+        "title": "Auggie & Me",
+        "author": "R.J. Palacio",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 2015,
+        "available": true
+    },
+    {
+        "title": "Wonder",
+        "author": "R.J. Palacio",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 2012,
+        "available": true
+    },
+    {
+        "title": "Eragon",
+        "author": "Christopher Paolini",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2002,
+        "available": true
+    },
+    {
+        "title": "Bridge to Terabithia",
+        "author": "Katherine Paterson",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1977,
+        "available": true
+    },
+    {
+        "title": "The Golden Compass",
+        "author": "Philip Pullman",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1995,
+        "available": true
+    },
+    {
+        "title": "The Subtle Knife",
+        "author": "Philip Pullman",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1997,
+        "available": true
+    },
+    {
+        "title": "The Amber Spyglass",
+        "author": "Philip Pullman",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2000,
+        "available": true
+    },
+    {
+        "title": "S.M. Puppy",
+        "author": "Oliver Quessenberry",
+        "genres": [
+            "Short Story",
+            "Fantasy"
+        ],
+        "publication": 2018,
+        "available": true
+    },
+    {
+        "title": "The Revenge of Magic",
+        "author": "James Riley",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2019,
+        "available": true
+    },
+    {
+        "title": "The Lightning Thief",
+        "author": "Rick Riordan",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2005,
+        "available": true
+    },
+    {
+        "title": "The Sea of Monsters",
+        "author": "Rick Riordan",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2006,
+        "available": true
+    },
+    {
+        "title": "The Titan's Curse",
+        "author": "Rick Riordan",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2007,
+        "available": true
+    },
+    {
+        "title": "The Battle of the Labyrinth",
+        "author": "Rick Riordan",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2008,
+        "available": true
+    },
+    {
+        "title": "The Last Olympian",
+        "author": "Rick Riordan",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2009,
+        "available": true
+    },
+    {
+        "title": "The Hidden Oracle",
+        "author": "Rick Riordan",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2016,
+        "available": true
+    },
+    {
+        "title": "Fantastic Beasts and Where to Find Them",
+        "author": "J.K. Rowling",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2001,
+        "available": true
+    },
+    {
+        "title": "The Crimes of Grindelwald",
+        "author": "J.K. Rowling",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 2008,
+        "available": true
+    },
+    {
+        "title": "Holes",
+        "author": "Louis Sachar",
+        "genres": [
+            "Children's",
+            "Adventure"
+        ],
+        "publication": 1998,
+        "available": true
+    },
+    {
+        "title": "The Rise of Riverstone",
+        "author": "Mandy Schimelpfenig",
+        "genres": [
+            "Medieval Historical Fantasy"
+        ],
+        "publication": 2021,
+        "available": true
+    },
+    {
+        "title": "Smells Like Dog",
+        "author": "Suzanne Selfors",
+        "genres": [
+            "Children's",
+            "Adventure"
+        ],
+        "publication": 2010,
+        "available": true
+    },
+    {
+        "title": "Smells Like Treasure",
+        "author": "Suzanne Selfors",
+        "genres": [
+            "Children's",
+            "Adventure"
+        ],
+        "publication": 2011,
+        "available": true
+    },
+    {
+        "title": "Smells Like Pirates",
+        "author": "Suzanne Selfors",
+        "genres": [
+            "Children's",
+            "Adventure"
+        ],
+        "publication": 2012,
+        "available": true
+    },
+    {
+        "title": "Appleblossom the Possum",
+        "author": "Holly Goldberg Sloan",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 2015,
+        "available": true
+    },
+    {
+        "title": "Here Be Monsters!",
+        "author": "Alan Snow",
+        "genres": [
+            "Children's",
+            "Fantasy"
+        ],
+        "publication": 2005,
+        "available": true
+    },
+    {
+        "title": "Treasure Island",
+        "author": "Robert Louis Stevenson",
+        "genres": [
+            "Adventure",
+            "Fiction"
+        ],
+        "publication": 1883,
+        "available": true
+    },
+    {
+        "title": "An Ember in the Ashes",
+        "author": "Sabaa Tahir",
+        "genres": [
+            "Young Adult",
+            "Fantasy"
+        ],
+        "publication": 2015,
+        "available": true
+    },
+    {
+        "title": "A Torch Against the Night",
+        "author": "Sabaa Tahir",
+        "genres": [
+            "Young Adult Literature",
+            "Fantasy Fiction"
+        ],
+        "publication": 2016,
+        "available": true
+    },
+    {
+        "title": "A Reaper at the Gates",
+        "author": "Sabaa Tahir",
+        "genres": [
+            "Young Adult Literature",
+            "Fantasy Fiction"
+        ],
+        "publication": 2018,
+        "available": true
+    },
+    {
+        "title": "A Sky Beyond the Storm",
+        "author": "Sabaa Tahir",
+        "genres": [
+            "Young Adult Literature",
+            "Fantasy Fiction"
+        ],
+        "publication": 2020,
+        "available": true
+    },
+    {
+        "title": "Children of Time",
+        "author": "Adrian Tchaikovsky",
+        "genres": [
+            "Science Fiction",
+            "Space Opera",
+            "Novel"
+        ],
+        "publication": 2015,
+        "available": true
+    },
+    {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1937,
+        "available": true
+    },
+    {
+        "title": "The Fellowship of the Ring",
+        "author": "J.R.R. Tolkien",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1954,
+        "available": true
+    },
+    {
+        "title": "The Two Towers",
+        "author": "J.R.R. Tolkien",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1954,
+        "available": true
+    },
+    {
+        "title": "The Return of the King",
+        "author": "J.R.R. Tolkien",
+        "genres": [
+            "Fantasy",
+            "Adventure"
+        ],
+        "publication": 1955,
+        "available": true
+    },
+    {
+        "title": "Charlotte's Web",
+        "author": "E.B. White",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1952,
+        "available": true
+    },
+    {
+        "title": "Stuart Little",
+        "author": "E.B. White",
+        "genres": [
+            "Children's",
+            "Fiction"
+        ],
+        "publication": 1945,
+        "available": true
+    },
+    {
+        "title": "The Swiss Family Robinson",
+        "author": "Johann David Wyss",
+        "genres": [
+            "Adventure",
+            "Fiction"
+        ],
+        "publication": 1812,
+        "available": true
+    },
+    {
+        "title": "I am the Messenger",
+        "author": "Markus Zusak",
+        "genres": [
+            "Young Adult",
+            "Fiction"
+        ],
+        "publication": 2002,
+        "available": true
+    },
+    {
+        "title": "Fortunately, The Milk",
+        "author": "Neil Gaiman",
+        "genre": [
+            "Fiction",
+            "Humor"
+        ],
+        "publication": "2013",
+        "available": "true"
+    },
+    {
+        "title": "The Mysterious Benedict Society",
+        "author": "Trenton Lee Stewart",
+        "genre": [
+            "Children's literature",
+            "Novel",
+            "Adventure fiction",
+            "Science fiction"
+        ],
+        "publication": "2007",
+        "available": "true"
+    }
+]
