@@ -13,7 +13,7 @@
 <body>
     <div class="banner">
         <img src="./logo.png" id="logo">
-        <h1 class="welcome">Oliver's<br>Library</h1>
+        <h1 class="libraryName">Oliver's<br>Library</h1>
         <form class="searchForm"> <!--autocomplete="off" to turn off autocomplete-->
             <input type="string" class="bookSearch" name="searchBar" placeholder="Search"></input>
             <button class="searchImageButton" hidden> <img src="search.png" width="40px" height="40px"></button>
@@ -25,7 +25,8 @@
         <div class="book"></div>
     </div>
     <div class="content">
-        <input type="text" id="cardNumberInput" name="cardNumber" placeholder="Card Number" inputmode="numeric"><br>
+        <input type="text" id="nameInput" namr="nameInput" placeholder="Name">
+        <input type="password" id="cardNumberInput" name="cardNumber" placeholder="Card Number" inputmode="numeric"><br>
         <button class="login">Login</button>
         <div class="wrapper" hidden>
             <div class="tabs">
@@ -113,7 +114,7 @@
             height: 80px;
         }
 
-        .welcome {
+        .libraryName {
             display: inline-block;
             color: white;
             /*margin-top: 50;*/
@@ -221,12 +222,18 @@
             padding-left: 10px;
             border-radius: 5px;
             margin-left: 10px;
-            margin-top: 105px;
+            margin-top: 5%;
         }
 
         .login {
-            padding-left: 10px;
+            /*padding-left: 10px;*/
             margin-left: 10px;
+        }
+
+        #nameInput {
+            margin-top: 20%;
+            margin-left: 10px;
+            border-radius: 5px;
         }
 
         .bookSearch {
@@ -313,6 +320,7 @@
             /* Align to the left */
             z-index: 998;
             /* Ensure the banner is on top of other content */
+            transform: translateX(100vh);
 
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -322,6 +330,10 @@
             --bs-color: rgba(0, 0, 0, 0.1);
             box-shadow: inset 0 -2px 5px var(--bs-color);*/
         }
+
+        /*.sidePanel.open {
+            transform: translateY(0);
+        }*/
 
 
         /*scroll bar*/
