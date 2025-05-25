@@ -1,10 +1,13 @@
 // import data from 'books.JSON' assert { type: 'json' };
 // console.log(data);
 
+//FIXME: browse tab doesnt have new books
+
 let version ='1.0.1';
 
 const loginButton = document.querySelector('.login');
 const cardNumberInput = document.getElementById("cardNumberInput");
+const nameInput = document.getElementById("nameInput");
 var user;
 let books = [];
 const librarian = ["The Three-Body Problem", "Finding Orion", "The Six of Crows", "The Star Shepherd", "The Lifters", "Ivory and Bone", "The List", "Looking for Alaska", "Look Out for the Little Guy", "The Bicycle Spy", "An Ember in the Ashes", "Children of Time", "I am the Messenger", "Starling House", "The Wonderful Story of Henry Sugar and Six More"]; 
@@ -27,6 +30,7 @@ const browseTabPanel = tabPanels.find(
 );
 
 let deviceType = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile': 'Desktop'; //should be const
+//let deviceType = 'Mobile';
 
 const searchBar = document.querySelector('.bookSearch');
 searchBar.style.display = "none";
@@ -156,6 +160,7 @@ function setUserTab() {
  * Sets up the browse tab with a card for each book that is not currently checked out
  */
 function setBrowseTab(){
+    console.log("browse tab set");// did not trigger at start 
     // Clears browse tab panel
     browseTabPanel.querySelector('.cards').innerHTML = '';
     // Sets browse tab panel
@@ -174,11 +179,6 @@ function setBrowseTab(){
             browseTabPanel.querySelector('.cards').insertAdjacentHTML('beforeend', code);
         }
     }
-    //const bookCovers = document.querySelectorAll('.bookCover');
-    /*bookCovers.forEach(function() {
-        // check if it has a src and it is loaded
-        // if not set it to the image not found
-    });*/
 }
 /**
  * Sets up the return tab with buttons for books checked out to the current user
@@ -343,19 +343,19 @@ class userClass {
 // User variables
 var users = [];
 
-var adaClass = new userClass('Ada', 7635185, JSON.parse(localStorage.getItem('adaCurrent')), JSON.parse(localStorage.getItem('adaPast')), JSON.parse(localStorage.getItem('adaHolds')));
+var adaClass = new userClass('Ada', 7635185, JSON.parse(localStorage.getItem('adaCurrent')) || [], JSON.parse(localStorage.getItem('adaPast')) || [], JSON.parse(localStorage.getItem('adaHolds')) || []);
 users.push(adaClass);
 
-var kamiClass = new userClass('Kami', 6386624, JSON.parse(localStorage.getItem('kamiCurrent')), JSON.parse(localStorage.getItem('kamiPast')), JSON.parse(localStorage.getItem('kamiHolds')));
+var kamiClass = new userClass('Kami', 6386624, JSON.parse(localStorage.getItem('kamiCurrent')) || [], JSON.parse(localStorage.getItem('kamiPast')) || [], JSON.parse(localStorage.getItem('kamiHolds')) || []);
 users.push(kamiClass);
 
-var jackClass = new userClass('Jack', 6145835, JSON.parse(localStorage.getItem('jackCurrent')), JSON.parse(localStorage.getItem('jackPast')), JSON.parse(localStorage.getItem('jackHolds')));
+var jackClass = new userClass('Jack', 6145835, JSON.parse(localStorage.getItem('jackCurrent')) || [], JSON.parse(localStorage.getItem('jackPast')) || [], JSON.parse(localStorage.getItem('jackHolds')) || []);
 users.push(jackClass);
 
-var karlaClass = new userClass('Karla', 7281600006567, JSON.parse(localStorage.getItem('karlaCurrent')), JSON.parse(localStorage.getItem('karlaPast')), JSON.parse(localStorage.getItem('karlaHolds')));
+var karlaClass = new userClass('Karla', 7281600006567, JSON.parse(localStorage.getItem('karlaCurrent')) || [], JSON.parse(localStorage.getItem('karlaPast')) || [], JSON.parse(localStorage.getItem('karlaHolds')) || []);
 users.push(karlaClass);
 
-var oliverClass = new userClass('Oliver', 1973, JSON.parse(localStorage.getItem('oliverCurrent')), JSON.parse(localStorage.getItem('oliverPast')), JSON.parse(localStorage.getItem('oliverHolds')), true);
+var oliverClass = new userClass('Oliver', 1973, JSON.parse(localStorage.getItem('oliverCurrent')) || [], JSON.parse(localStorage.getItem('oliverPast')) || [], JSON.parse(localStorage.getItem('oliverHolds')) || [], true);
 users.push(oliverClass);
 
 // add admin actions
@@ -386,7 +386,7 @@ function arrayToArrayString(array){
         return "";
     }
     for(let a = 0; a < array.length; a++){
-        genresString += "'" + array[a] + "', ";
+        genresString += `"` + array[a] + `", `;
     }
     genresString = genresString.substring(0,genresString.length - 2);
     genresString += "]"
@@ -498,13 +498,13 @@ function newBook(title, author, genres, publication){
         publication: publication,
         available: true,
     });
-    console.log(`books.push({
-        title: '${title}',
-        author: '${author}',
-        genre: ${arrayToArrayString(genres)},
-        publication: ${publication},
-        available: true,
-    });`);
+    console.log(`{
+        "title": "${title}",
+        "author": "${author}",
+        "genre": ${arrayToArrayString(genres)},
+        "publication": "${publication}",
+        "available": "true"
+    }`);
     document.getElementById('bookTitle').value = "";
     document.getElementById('bookAuthor').value = "";
     document.getElementById('bookGenre').value = "";
@@ -573,9 +573,10 @@ function search(e){
  * Finds a user based on their card number
  * @param {Number} num The user's card number
  */
-function findUser(num) {
+function findUser(num, userInputName) {
     for(let u = 0; u < users.length; u++){
-        if(num == users[u].getCardNum()){
+        //to lowercase has ruined it
+        if(num == users[u].getCardNum() && userInputName.toLowerCase() == users[u].getName().toLowerCase()){
             user = users[u];
         }
     }
@@ -699,6 +700,7 @@ function handleTabClick(event) {
 
     //for mobile
     sidePanel.hidden = true;
+    //sidePanel.classList.remove('open');
 }
 
 /**
@@ -714,16 +716,11 @@ function closeModal() {
  * sets up the tab panels, adds books to the array, and a bunch of other stuff
  */
 function setUp(){
-    setUpBooks();
-    //sortArray(books);
-    /*books.sort(function(a,b){
-        const aTitle = a.title;
-        const bTitle = b.title
-        return (aTitle).compare(bTitle); //not working
-    });*/
+    setUpBooks(); // It is unable to read in the books before looking through them
+    
     console.log(`Welcome ${user.getName()}`);
     console.log(deviceType);
-
+    nameInput.style.display = "none";
     cardNumberInput.style.display = "none"; 
     loginButton.hidden = true;
     div.hidden = false;
@@ -731,7 +728,6 @@ function setUp(){
     searchBar.style.display = "inline";
     searchButtonImage.hidden = false;
     
-
     // Sets what books are checkedout
     for( let u = 0; u < users.length; u++){
         if(users[u].current !== null){
@@ -740,13 +736,7 @@ function setUp(){
             }
         }
     }
-    
-    // !IMPORTANT! These next lines are only for school computer with no saved user data
-    adaClass.reset();
-    karlaClass.reset();
-    jackClass.reset();
-    kamiClass.reset();
-    oliverClass.reset();
+
     // Sets up the tabs
     if(!user.isAdmin()){
         notAdmin();
@@ -794,7 +784,7 @@ function setUp(){
 loginButton.addEventListener('click', (e) => {
     //Make this a log in function
     if(user === undefined){
-        findUser(cardNumberInput.value);
+        findUser(cardNumberInput.value, nameInput.value);
         if(user !== undefined){
             setUp();
         }
@@ -809,7 +799,7 @@ loginButton.addEventListener('click', (e) => {
 window.addEventListener('keydown', (e) => {
     if(e.key === 'Enter'){
         if(user === undefined){
-            findUser(cardNumberInput.value);
+            findUser(cardNumberInput.value, nameInput.value);
             if(user !== undefined){
                 setUp();
             }
@@ -822,11 +812,13 @@ window.addEventListener('keydown', (e) => {
         /*else{
             search();
         }*/
+        return;
     }
-    else if (e.key === 'Escape') {
+    else if (e.key === 'Escape' && user !== undefined) {
         closeModal();
+        return;
     }
-    else if(e.key === "Tab"){
+    else if(e.key === "Tab" && user !== undefined){
         e.preventDefault();
         let selectedTab; //Selected tab's id
         tabButtons.forEach((tab) => {
@@ -906,15 +898,17 @@ window.addEventListener('keydown', (e) => {
                 }
             });
         }
+        return;
     }
-    else if(e.code === "Space"){
+    /*else if(e.code === "Space"){
         e.preventDefault();
         deviceType = 'Mobile'; //Temp
         if(deviceType === 'Mobile'){
             //sidePanel.hidden = !sidePanel.hidden;
             setMobile();
         }
-    }
+        return;
+    }*/
 });
 // When image clicked search
 searchButtonImage.addEventListener('click', search);
@@ -975,894 +969,72 @@ searchForm.addEventListener('submit', search);
 
 stackButton.addEventListener('click', function(e) {
     sidePanel.hidden = !sidePanel.hidden;
+    console.log("button pressed");
+    //sidePanel.classList.add('open'); // trying to animate it
 });
+
+function formatArrayOutput(array){
+    let arrayOutput = "";
+    for(let a = 0; a < array.length; a++){
+        arrayOutput += `"${array[a]}",`;
+    }
+    return arrayOutput.slice(0, arrayOutput.length-1);
+}
+
+function formatBooks(){
+    let output = "";
+    for(let b = 0; b < books.length; b++){
+        output += `{"title": "${books[b].title}", "author": "${books[b].author}", "genres": [${formatArrayOutput(books[b].genre)}], "publication": ${books[b].publication}, "available": true },`;
+    }
+    console.log(output.slice(0, output.length-1));
+    navigator.clipboard.writeText(output.slice(0, output.length-1));
+
+}
 
 /**
  * Creates all the book objects
  */
-function setUpBooks() {
-    books.push({
-        title: 'The One and Only Ivan',
-        author: 'Katherine Applegate',
-        genre: ['Fiction', 'Fantasy'],
-        publication: 2012,
-        available: true,
+/*function setUpBooks() {
+    fetch('./books.json').then(response => {
+        if(!response.ok){
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    }).then(data =>{
+       books = [...data];
+    }).catch(error => {
+        console.error(`error fetching or parsing Json: `, error)
     });
-    books.push({
-        title: 'Finding Orion',
-        author: 'John David Anderson',
-        genre: ['Mystery', 'Adventure'],
-        publication: 2019,
-        available: true,
-    });
-    books.push({
-        title: 'Tuck Everlasting',
-        author: 'Natalie Babbitt',
-        genre: ['Fantasy', 'Romance'],
-        publication: 1975,
-        available: true,
-    });
-    books.push({
-        title: 'Shadow and Bone',
-        author: 'Leigh Bardugo',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2012,
-        available: true,
-    });
-    books.push({
-        title: 'Siege and Storm',
-        author: 'Leigh Bardugo',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2013,
-        available: true,
-    });
-    books.push({
-        title: 'Ruin and Rising',
-        author: 'Leigh Bardugo',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2014,
-        available: true,
-    });
-    books.push({
-        title: 'The Six of Crows',
-        author: 'Leigh Bardugo',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2015,
-        available: true,
-    });
-    books.push({
-        title: 'The Crooked Kingdom',
-        author: 'Leigh Bardugo',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2016,
-        available: true,
-    });
-    books.push({
-        title: 'King of Scars',
-        author: 'Leigh Bardugo',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2019,
-        available: true,
-    });
-    books.push({
-        title: 'Rule of Wolves',
-        author: 'Leigh Bardugo',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2021,
-        available: true,
-    });
-    books.push({
-        title: 'Serafina and the Black Cloak',
-        author: 'Robert Beatty',
-        genre: ['Mystery', 'Fantasy'],
-        publication: 2015,
-        available: true,
-    });
-    books.push({
-        title: 'Serafina and the Twisted Staff',
-        author: 'Robert Beatty',
-        genre: ['Mystery', 'Fantasy'],
-        publication: 2016,
-        available: true,
-    });
-    books.push({
-        title: 'The Iron Trial',
-        author: 'Holly Black',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2014,
-        available: true,
-    });
-    books.push({
-        title: 'The Copper Gauntlet',
-        author: 'Holly Black',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2015,
-        available: true,
-    });
-    books.push({
-        title: 'The Bronze Key',
-        author: 'Holly Black',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2016,
-        available: true,
-    });
-    books.push({
-        title: 'The Silver Mask',
-        author: 'Holly Black',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2017,
-        available: true,
-    });
-    books.push({
-        title: 'The Golden Tower',
-        author: 'Holly Black',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2018,
-        available: true,
-    });
-    books.push({
-        title: 'Henry Huggins',
-        author: 'Beverly Cleary',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1950,
-        available: true,
-    });
-    books.push({
-        title: 'Ramona the Pest',
-        author: 'Beverly Cleary',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1968,
-        available: true,
-    });
-    books.push({
-        title: 'Ramona and Her Father',
-        author: 'Beverly Cleary',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1977,
-        available: true,
-    });
-    books.push({
-        title: 'Ramona and Her Mother',
-        author: 'Beverly Cleary',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1979,
-        available: true,
-    });
-    books.push({
-        title: 'Ramona Forever',
-        author: 'Beverly Cleary',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1984,
-        available: true,
-    });
-    books.push({
-        title: 'Ramona Quimby Age 8',
-        author: 'Beverly Cleary',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1981,
-        available: true,
-    });
-    books.push({
-        title: 'The Mouse and the Motorcycle',
-        author: 'Beverly Cleary',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1965,
-        available: true,
-    });
-    books.push({
-        title: 'Runaway Ralph',
-        author: 'Beverly Cleary',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1970,
-        available: true,
-    });
-    books.push({
-        title: 'Ralph S. Mouse',
-        author: 'Beverly Cleary',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1982,
-        available: true,
-    });
-    books.push({
-        title: 'The Ballad of Songbirds and Snakes',
-        author: 'Suzanne Collins',
-        genre: ['Science Fiction', 'Fantasy'],
-        publication: 2020,
-        available: true,
-    });
-    books.push({
-        title: 'The Hunger Games',
-        author: 'Suzanne Collins',
-        genre: ['Science Fiction', 'Adventure'],
-        publication: 2008,
-        available: true,
-    });
-    books.push({
-        title: 'Catching Fire',
-        author: 'Suzanne Collins',
-        genre: ['Science Fiction', 'Adventure'],
-        publication: 2009,
-        available: true,
-    });
-    books.push({
-        title: 'Mockingjay',
-        author: 'Suzanne Collins',
-        genre: ['Science Fiction', 'Adventure'],
-        publication: 2010,
-        available: true,
-    });
-    books.push({
-        title: 'Gregor the Overlander',
-        author: 'Suzanne Collins',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2003,
-        available: true,
-    });
-    books.push({
-        title: 'Gregor and the Prophecy of Bane',
-        author: 'Suzanne Collins',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2004,
-        available: true,
-    });
-    books.push({
-        title: 'Gregor and the Curse of the Warmbloods',
-        author: 'Suzanne Collins',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2005,
-        available: true,
-    });
-    books.push({
-        title: 'Gregor and the Marks of Secret',
-        author: 'Suzanne Collins',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2006,
-        available: true,
-    });
-    books.push({
-        title: 'Gregor and the Code of Claw',
-        author: 'Suzanne Collins',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2007,
-        available: true,
-    });
-    books.push({
-        title: 'The Wizards of Once',
-        author: 'Cressida Cowell',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2017,
-        available: true,
-    });
-    books.push({
-        title: 'Twice Magic',
-        author: 'Cressida Cowell',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2018,
-        available: true,
-    });
-    books.push({
-        title: 'Jurassic Park',
-        author: 'Michael Crichton',
-        genre: ['Science Fiction', 'Thriller'],
-        publication: 1990,
-        available: true,
-    });
-    books.push({
-        title: 'A Winter\'s Promise',
-        author: 'Christelle Dabos',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2013,
-        available: true,
-    });
-    books.push({
-        title: 'Matilda',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1988,
-        available: true,
-    });
-    books.push({
-        title: 'The BFG',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1982,
-        available: true,
-    });
-    books.push({
-        title: 'Charlie and the Chocolate Factory',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1964,
-        available: true,
-    });
-    books.push({
-        title: 'Fantastic Mr. Fox',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1970,
-        available: true,
-    });
-    books.push({
-        title: 'George\'s Marvelous Medicine',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1981,
-        available: true,
-    });
-    books.push({
-        title: 'James and the Giant Peach',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1961,
-        available: true,
-    });
-    books.push({
-        title: 'The Magic Finger',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1966,
-        available: true,
-    });
-    books.push({
-        title: 'The Twits',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1980,
-        available: true,
-    });
-    books.push({
-        title: 'The Witches',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1983,
-        available: true,
-    });
-    books.push({
-        title: 'Flora & Ulysses',
-        author: 'Kate DiCamillo',
-        genre: ['Children\'s', 'Adventure'],
-        publication: 2013,
-        available: true,
-    });
-    books.push({
-        title: 'The Lifters',
-        author: 'Dave Eggers',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2018,
-        available: true,
-    });
-    books.push({
-        title: 'Ivory and Bone',
-        author: 'Julie Eshbaugh',
-        genre: ['Young Adult', 'Historical'],
-        publication: 2016,
-        available: true,
-    });
-    books.push({
-        title: 'Obsidian and Stars',
-        author: 'Julie Eshbaugh',
-        genre: ['Young Adult', 'Historical'],
-        publication: 2017,
-        available: true,
-    });
-    books.push({
-        title: 'The List',
-        author: 'Patricia Forde',
-        genre: ['Young Adult', 'Science Fiction'],
-        publication: 2017,
-        available: true,
-    });
-    books.push({
-        title: 'The Honest Truth',
-        author: 'Dan Gemeinhart',
-        genre: ['Children\'s', 'Adventure'],
-        publication: 2015,
-        available: true,
-    });
-    books.push({
-        title: 'Escape from Mr. Lemoncello\'s Library',
-        author: 'Chris Grabenstein',
-        genre: ['Children\'s', 'Mystery'],
-        publication: 2013,
-        available: true,
-    });
-    books.push({
-        title: 'Looking for Alaska',
-        author: 'John Green',
-        genre: ['Young Adult', 'Fiction'],
-        publication: 2005,
-        available: true,
-    });
-    books.push({
-        title: 'The Glass Sentence',
-        author: 'S.E. Grove',
-        genre: ['Young Adult', 'Fantasy'],
-        publication: 2014,
-        available: true,
-    });
-    books.push({
-        title: 'The Magic Misfits',
-        author: 'Neil Patrick Harris',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2017,
-        available: true,
-    });
-    books.push({
-        title: 'Sal & Gabi Break the Universe',
-        author: 'Carlos Hernandez',
-        genre: ['Children\'s', 'Science Fiction'],
-        publication: 2019,
-        available: true,
-    });
-    books.push({
-        title: 'Redwall',
-        author: 'Brian Jacques',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1986,
-        available: true,
-    });
-    books.push({
-        title: 'The Phantom Tollbooth',
-        author: 'Norton Juster',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1961,
-        available: true,
-    });
-    books.push({
-        title: 'Restart',
-        author: 'Gordon Korman',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 2017,
-        available: true,
-    });
-    books.push({
-        title: 'The Capture',
-        author: 'Kathryn Lasky',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2003,
-        available: true,
-    });
-    books.push({
-        title: 'The Lion the Witch and the Wardrobe',
-        author: 'C.S. Lewis',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1950,
-        available: true,
-    });
-    books.push({
-        title: 'Prince Caspian',
-        author: 'C.S. Lewis',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1951,
-        available: true,
-    });
-    books.push({
-        title: 'The Voyage of the Dawn Treader',
-        author: 'C.S. Lewis',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1952,
-        available: true,
-    });
-    books.push({
-        title: 'The Silver Chair',
-        author: 'C.S. Lewis',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1953,
-        available: true,
-    });
-    books.push({
-        title: 'The Horse and His Boy',
-        author: 'C.S. Lewis',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1954,
-        available: true,
-    });
-    books.push({
-        title: 'The Magician\'s Nephew',
-        author: 'C.S. Lewis',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1955,
-        available: true,
-    });
-    books.push({
-        title: 'The Last Battle',
-        author: 'C.S. Lewis',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1956,
-        available: true,
-    });
-    books.push({
-        title: 'The Call of the Wild',
-        author: 'Jack London',
-        genre: ['Adventure', 'Fiction'],
-        publication: 1903,
-        available: true,
-    });
-    books.push({
-        title: 'The Bicycle Spy',
-        author: 'Yona Zeldis McDonough',
-        genre: ['Children\'s', 'Historical'],
-        publication: 2016,
-        available: true,
-    });
-    books.push({
-        title: 'Winnie the Pooh',
-        author: 'A.A. Milne',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 1926,
-        available: true,
-    });
-    books.push({
-        title: 'The Stars Did Wander Darkling',
-        author: 'John D. Nesbitt',
-        genre: ['Science Fiction', 'Short Stories'],
-        publication: 1978,
-        available: true,
-    });
-    books.push({
-        title: 'Legacy',
-        author: 'Shannon Messenger',
-        genre: ['Young Adult', 'Fantasy'],
-        publication: 2019,
-        available: true,
-    });
-    books.push({
-        title: 'Impyrium',
-        author: 'Henry H. Neff',
-        genre: ['Young Adult', 'Fantasy'],
-        publication: 2016,
-        available: true,
-    });
-    books.push({
-        title: 'Island of the Blue Dolphins',
-        author: 'Scott O\'Dell',
-        genre: ['Children\'s', 'Adventure'],
-        publication: 1960,
-        available: true,
-    });
-    books.push({
-        title: 'Auggie & Me',
-        author: 'R.J. Palacio',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 2015,
-        available: true,
-    });
-    books.push({
-        title: 'Eragon',
-        author: 'Christopher Paolini',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2002,
-        available: true,
-    });
-    books.push({
-        title: 'Bridge to Terabithia',
-        author: 'Katherine Paterson',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1977,
-        available: true,
-    });
-    books.push({
-        title: 'I Funny',
-        author: 'James Patterson and Chris Grabenstein',
-        genre: ['Children\'s', 'Humor'],
-        publication: 2012,
-        available: true,
-    });
-    books.push({
-        title: 'The Golden Compass',
-        author: 'Philip Pullman',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1995,
-        available: true,
-    });
-    books.push({
-        title: 'The Subtle Knife',
-        author: 'Philip Pullman',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1997,
-        available: true,
-    });
-    books.push({
-        title: 'The Amber Spyglass',
-        author: 'Philip Pullman',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2000,
-        available: true,
-    });
-    books.push({
-        title: 'S.M. Puppy',
-        author: 'Oliver Quessenberry',
-        genre: ['Short Story', 'Fantasy'],
-        publication: 2018,
-        available: true,
-    });
-    books.push({
-        title: 'The Revenge of Magic',
-        author: 'James Riley',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2019,
-        available: true,
-    });
-    books.push({
-        title: 'The Lightning Thief',
-        author: 'Rick Riordan',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2005,
-        available: true,
-    });
-    books.push({
-        title: 'The Sea of Monsters',
-        author: 'Rick Riordan',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2006,
-        available: true,
-    });
-    books.push({
-        title: 'The Titan\'s Curse',
-        author: 'Rick Riordan',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2007,
-        available: true,
-    });
-    books.push({
-        title: 'The Battle of the Labyrinth',
-        author: 'Rick Riordan',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2008,
-        available: true,
-    });
-    books.push({
-        title: 'The Last Olympian',
-        author: 'Rick Riordan',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2009,
-        available: true,
-    });
-    books.push({
-        title: 'The Hidden Oracle',
-        author: 'Rick Riordan',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2016,
-        available: true,
-    });
-    books.push({
-        title: 'Fantastic Beasts and Where to Find Them',
-        author: 'J.K. Rowling',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2001,
-        available: true,
-    });
-    books.push({
-        title: 'The Crimes of Grindelwald',
-        author: 'J.K. Rowling',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 2008,
-        available: true,
-    });
-    books.push({
-        title: 'Holes',
-        author: 'Louis Sachar',
-        genre: ['Children\'s', 'Adventure'],
-        publication: 1998,
-        available: true,
-    });
-    books.push({
-        title: 'Here Be Monsters!',
-        author: 'Alan Snow',
-        genre: ['Children\'s', 'Fantasy'],
-        publication: 2005,
-        available: true,
-    });
-    books.push({
-        title: 'Smells Like Dog',
-        author: 'Suzanne Selfors',
-        genre: ['Children\'s', 'Adventure'],
-        publication: 2010,
-        available: true,
-    });
-    books.push({
-        title: 'Smells Like Treasure',
-        author: 'Suzanne Selfors',
-        genre: ['Children\'s', 'Adventure'],
-        publication: 2011,
-        available: true,
-    });
-    books.push({
-        title: 'Smells Like Pirates',
-        author: 'Suzanne Selfors',
-        genre: ['Children\'s', 'Adventure'],
-        publication: 2012,
-        available: true,
-    });
-    books.push({
-        title: 'Appleblossom the Possum',
-        author: 'Holly Goldberg Sloan',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 2015,
-        available: true,
-    });
-    books.push({
-        title: 'Treasure Island',
-        author: 'Robert Louis Stevenson',
-        genre: ['Adventure', 'Fiction'],
-        publication: 1883,
-        available: true,
-    });
-    books.push({
-        title: 'The Swiss Family Robinson',
-        author: 'Johann David Wyss',
-        genre: ['Adventure', 'Fiction'],
-        publication: 1812,
-        available: true,
-    });
-    books.push({
-        title: 'The Hobbit',
-        author: 'J.R.R. Tolkien',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1937,
-        available: true,
-    });
-    books.push({
-        title: 'The Fellowship of the Ring',
-        author: 'J.R.R. Tolkien',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1954,
-        available: true,
-    });
-    books.push({
-        title: 'The Two Towers',
-        author: 'J.R.R. Tolkien',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1954,
-        available: true,
-    });
-    books.push({
-        title: 'The Return of the King',
-        author: 'J.R.R. Tolkien',
-        genre: ['Fantasy', 'Adventure'],
-        publication: 1955,
-        available: true,
-    });
-    books.push({
-        title: 'Charlotte\'s Web',
-        author: 'E.B. White',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1952,
-        available: true,
-    });
-    books.push({
-        title: 'Stuart Little',
-        author: 'E.B. White',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 1945,
-        available: true,
-    });
-    books.push({
-        title: 'I am the Messenger',
-        author: 'Markus Zusak',
-        genre: ['Young Adult', 'Fiction'],
-        publication: 2002,
-        available: true,
-    });
-    books.push({
-        title: 'Wonder',
-        author: 'R.J. Palacio',
-        genre: ['Children\'s', 'Fiction'],
-        publication: 2012,
-        available: true,
-    });
-    books.push({
-        title: 'The Wonderful Story of Henry Sugar and Six More',
-        author: 'Roald Dahl',
-        genre: ['Children\'s', 'Short Stories'],
-        publication: 1977,
-        available: true,
-    });
-    books.push({
-        title: 'The Matchstick Castle',
-        author: 'Keir Graff',
-        genre: ['Children\'s', 'Adventure'],
-        publication: 2017,
-        available: true,
-    });
-    books.push({
-        title: 'An Ember in the Ashes',
-        author: 'Sabaa Tahir',
-        genre: ['Young Adult', 'Fantasy'],
-        publication: 2015,
-        available: true,
-    });  
-    books.push({
-        title: 'Children of Time',
-        author: 'Adrian Tchaikovsky',
-        genre: ['Science Fiction', 'Space Opera','Novel'],
-        publication: 2015,
-        available: true,
-    });
-    books.push({
-        title: 'Look Out for the Little Guy',
-        author: 'Scott Lang',
-        genre: ['Humor', 'Fiction', 'Superhero', 'Autobiography'],
-        publication: 2023,
-        available: true,
-    });
-    books.push({
-        title: 'The Rise of Riverstone',
-        author: 'Mandy Schimelpfenig',
-        genre: ['Medieval Historical Fantasy'],
-        publication: 2021,
-        available: true,
-    });
-    books.push({
-        title: 'A Torch Against the Night',
-        author: 'Sabaa Tahir',
-        genre: ['Young Adult Literature', 'Fantasy Fiction'],
-        publication: 2016,
-        available: true,
-    });
-    books.push({
-        title: 'A Reaper at the Gates',
-        author: 'Sabaa Tahir',
-        genre: ['Young Adult Literature', 'Fantasy Fiction'],
-        publication: 2018,
-        available: true,
-    });
-    books.push({
-        title: 'A Sky Beyond the Storm',
-        author: 'Sabaa Tahir',
-        genre: ['Young Adult Literature', 'Fantasy Fiction'],
-        publication: 2020,
-        available: true,
-    });
-    books.push({
-        title: 'The Three-Body Problem',
-        author: 'Cixin Liu',
-        genre: ['Science Fiction', 'Novel', 'Speculative Fiction', 'Chinese Science Fiction'],
-        publication: 2008,
-        available: true,
-    });
-    books.push({
-        title: 'The Dark Forest',
-        author: 'Cixin Liu',
-        genre: ['Science Fiction', 'Novel', 'Hard Science Fiction'],
-        publication: 2008,
-        available: true,
-    });
-    books.push({
-        title: 'Death\'s End',
-        author: 'Cixin Liu',
-        genre: ['Science Fiction', 'Hard Science Fiction'],
-        publication: 2010,
-        available: true,
-    });
-    books.push({
-        title: 'Emperor of the Universe',
-        author: 'David Lubar',
-        genre: ['Humor', 'Science Fiction', 'Fiction'],
-        publication: 2019,
-        available: true,
-    });
-    books.push({
-        title: 'The Force Awakens',
-        author: 'Michael Kogge',
-        genre: ['Science Fiction', 'Fiction', 'Fantasy', 'Space Opera', 'Adventure', 'Novel', 'Star Wars'],
-        publication: 2015,
-        available: true,
-    });
-    books.push({
-        title: 'The Star Shepherd',
-        author: 'Dan Haring and MarcyKate Connolly',
-        genre: ['Fantasy', 'Fiction', 'Adventure', 'Science Fiction', 'Young Adult'],
-        publication: 2019,
-        available: true,
-    });
-    books.push({
-        title: 'Starling House',
-        author: 'Alix E. Harrow',
-        genre: ['Fantasy Fiction', 'Gothic Fiction', 'Dark Fantasy', 'Contemporary Fantasy'],
-        publication: 2023,
-        available: true,
-    });
-
     sortBooks();  
+}*/
+
+let readFilePromise = new Promise(async function(myResolve, myReject) {
+    const response = await fetch('./books.json');
+    if (!response.ok) {
+        //throw new Error(`HTTP error! status: ${response.status}`);
+        //error
+    }
+    else{
+        books = [...await (response.json())];  // Waits until books.json is fully loaded
+    }
+});
+
+readFilePromise.then(
+    function(value){sortBooks();},
+    function(error){console.log(error);}
+);
+
+async function setUpBooks() {
+    try {
+        const response = await fetch('./books.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        books = [...await (response.json())];  // Waits until books.json is fully loaded
+        sortBooks();  // Now it runs after books is populated
+    } catch (error) {
+        console.error("Error fetching or parsing JSON:", error);
+    }
 }
+
