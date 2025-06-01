@@ -2,7 +2,7 @@
 // console.log(data);
 
 //FIXME: browse tab doesnt have new books
-
+import { User } from './User.js';
 let version ='1.0.1';
 
 const loginButton = document.querySelector('.login');
@@ -10,6 +10,7 @@ const cardNumberInput = document.getElementById("cardNumberInput");
 const nameInput = document.getElementById("nameInput");
 var user;
 let books = [];
+var users = [];
 const librarian = ["The Three-Body Problem", "Finding Orion", "The Six of Crows", "The Star Shepherd", "The Lifters", "Ivory and Bone", "The List", "Looking for Alaska", "Look Out for the Little Guy", "The Bicycle Spy", "An Ember in the Ashes", "Children of Time", "I am the Messenger", "Starling House", "The Wonderful Story of Henry Sugar and Six More"]; 
 const div = document.querySelector('.wrapper');
 const tabs = document.querySelector('.tabs');
@@ -172,7 +173,7 @@ function setBrowseTab(){
                 code += `<div class="cornnerBanner">Librarian Pick</div>`;
             }
             code += `
-                <img class="bookCover" width="151" height="225" alt="Book cover for ${books[b].title}" src="Book images/${books[b].title.toLowerCase()}.jpg">
+                <img class="bookCover" width="151" height="225" alt="Book cover for ${books[b].title}" src="./resources/Book images/${books[b].title.toLowerCase()}.jpg">
                 <h2>${books[b].title}</h2>
                 <button value="${books[b].title}">Learn more →</button>
             </div>`;
@@ -232,130 +233,22 @@ function librarianCheck(title){
 }
 
 
-class userClass {
-    /**
-     * Creates a user based on provided arguments or the defaults.
-     * @param  {String} name Name of the user
-     * @param  {Number} num The users card number
-     * @param  {Array} current An array of the books the user currently has checked out
-     * @param  {Array} past An array of the books the user has previously checked out
-     * @param  {Array} holds An array of the books the user currently has a hold on
-     * @param  {Boolean} admin Is the user an admin or not
-    */
-    constructor(name, num = Math.random() * 100000, current = [], past = [], holds = [], admin = false) {
-        // Use if statements to create constructors with different number
-        // of params, have some defaults
-        this.name = name;
-        this.num = num;
-        this.current = current;
-        this.past = past;
-        this.holds = holds;
-        this.admin = admin;
-    }
-    /**
-     * Sets the users current, past and holds to nothing but not null
-     * @returns Weather or not it was successful
-     */
-    reset(){
-        this.current = [];
-        this.past = [];
-        this.holds = [];
-        if(this.current == [] && this.past == [] && this.holds == []){
-            setUserTab();
-            return true;
-        }
-        setUserTab();
-        return false;
-    }
-    /**
-     * Puts the user's information into a string
-     * @returns String representation of the user
-     */
-    toString() {
-        return `Name: ${this.name}
-            Currently Checkedout: ${this.current}
-            History: ${this.past}
-            Holds: ${this.holds}
-            Admin: ${this.admin}
-        `;
-    }
-    /**
-     * Generates the HTML for the user's account page
-     * @returns HTML for account page
-     */
-    toHTML() {
-        return `
-        <p>Name: ${this.name} </p>
-        <p>Currently Checkedout: ${this.current}</p>
-        <p>History: ${this.past}</p>
-        <p>Holds: ${this.holds}</p>
-        `;
-    }
-
-    //Getter methods
-    /**
-     * Getter method for user name
-     * @returns The user's name
-     */
-    getName() {
-        return this.name;
-    }
-    /**
-     * Getter method for card number
-     * @returns The user's card number
-     */
-    getCardNum() {
-        return this.num;
-    }
-    /**
-     * Getter method for books currently checked out to them
-     * @returns The books they currently have checked out
-     */
-    getCurrent() {
-        return this.current;
-    }
-    /**
-     * Getter method for books previously checked out
-     * @returns The books the they previously checked out
-     */
-    getPast() {
-        return this.past;
-    }
-    /**
-     * Getter method for holds
-     * @returns The books they have holds on
-     */
-    getHolds() {
-        return this.holds;
-    }
-    /**
-     * Getter method for admin variable
-     * @returns If they are an admin or not.
-     */
-    isAdmin() {
-        return this.admin;
-    }
-
-    //ones to edit it?
-}
-
 
 // User variables
-var users = [];
 
-var adaClass = new userClass('Ada', 7635185, JSON.parse(localStorage.getItem('adaCurrent')) || [], JSON.parse(localStorage.getItem('adaPast')) || [], JSON.parse(localStorage.getItem('adaHolds')) || []);
-users.push(adaClass);
+//var adaClass = new User('Ada', 7635185, JSON.parse(localStorage.getItem('adaCurrent')) || [], JSON.parse(localStorage.getItem('adaPast')) || [], JSON.parse(localStorage.getItem('adaHolds')) || []);
+users.push(new User('Ada', 7635185, JSON.parse(localStorage.getItem('adaCurrent')) || [], JSON.parse(localStorage.getItem('adaPast')) || [], JSON.parse(localStorage.getItem('adaHolds')) || []));
 
-var kamiClass = new userClass('Kami', 6386624, JSON.parse(localStorage.getItem('kamiCurrent')) || [], JSON.parse(localStorage.getItem('kamiPast')) || [], JSON.parse(localStorage.getItem('kamiHolds')) || []);
+var kamiClass = new User('Kami', 6386624, JSON.parse(localStorage.getItem('kamiCurrent')) || [], JSON.parse(localStorage.getItem('kamiPast')) || [], JSON.parse(localStorage.getItem('kamiHolds')) || []);
 users.push(kamiClass);
 
-var jackClass = new userClass('Jack', 6145835, JSON.parse(localStorage.getItem('jackCurrent')) || [], JSON.parse(localStorage.getItem('jackPast')) || [], JSON.parse(localStorage.getItem('jackHolds')) || []);
+var jackClass = new User('Jack', 6145835, JSON.parse(localStorage.getItem('jackCurrent')) || [], JSON.parse(localStorage.getItem('jackPast')) || [], JSON.parse(localStorage.getItem('jackHolds')) || []);
 users.push(jackClass);
 
-var karlaClass = new userClass('Karla', 7281600006567, JSON.parse(localStorage.getItem('karlaCurrent')) || [], JSON.parse(localStorage.getItem('karlaPast')) || [], JSON.parse(localStorage.getItem('karlaHolds')) || []);
+var karlaClass = new User('Karla', 7281600006567, JSON.parse(localStorage.getItem('karlaCurrent')) || [], JSON.parse(localStorage.getItem('karlaPast')) || [], JSON.parse(localStorage.getItem('karlaHolds')) || []);
 users.push(karlaClass);
 
-var oliverClass = new userClass('Oliver', 1973, JSON.parse(localStorage.getItem('oliverCurrent')) || [], JSON.parse(localStorage.getItem('oliverPast')) || [], JSON.parse(localStorage.getItem('oliverHolds')) || [], true);
+var oliverClass = new User('Oliver', 1973, JSON.parse(localStorage.getItem('oliverCurrent')) || [], JSON.parse(localStorage.getItem('oliverPast')) || [], JSON.parse(localStorage.getItem('oliverHolds')) || [], true);
 users.push(oliverClass);
 
 // add admin actions

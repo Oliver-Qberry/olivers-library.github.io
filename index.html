@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Oliver's Library</title>
-    <link rel="icon" type="image/x-icon" href="./logo.png">
+    <link rel="icon" type="image/x-icon" href="./resources/logo.png">
     <link rel="stylesheet" href="./base.css">
     <link rel="stylesheet" href="./tabs-style.css">
 </head>
 
 <body>
     <div class="banner">
-        <img src="./logo.png" id="logo">
+        <img src="./resources/" id="logo">
         <h1 class="libraryName">Oliver's<br>Library</h1>
         <form class="searchForm"> <!--autocomplete="off" to turn off autocomplete-->
             <input type="string" class="bookSearch" name="searchBar" placeholder="Search"></input>
-            <button class="searchImageButton" hidden> <img src="search.png" width="40px" height="40px"></button>
+            <button class="searchImageButton" hidden> <img src="./resources/search.png" width="40px"
+                    height="40px"></button>
         </form>
-        <button class="stackImageButton" hidden> <img src="stack.png" width="40px" height="40px"></button>
+        <button class="stackImageButton" hidden> <img src="./resources/stack.png" width="40px" height="40px"></button>
     </div>
     <div class="sidePanel tablist" hidden></div>
     <div class="custom-cursor">
@@ -94,7 +95,7 @@
         </div>
     </div>
 
-    <script src="./library.js"></script>
+    <script type="module" src="./library.js"></script>
     <style>
         .cornnerBanner {
             /*adds a space at top that needs to be fixed*/
