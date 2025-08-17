@@ -1296,5 +1296,27 @@
         ],
         "publication": "2007",
         "available": "true"
+    },
+    {
+        "title": "The Adventures of Huckleberry Finn",
+        "author": "Mark Twain",
+        "genre": [
+            "Picaresque novel",
+            "Bildungsroman",
+            "Adventure"
+        ],
+        "publication": "1884",
+        "available": "true"
+    },
+    {
+        "title": "The Apothecary",
+        "author": "Maile Meloy",
+        "genre": [
+            "Novel",
+            "Historical Fiction",
+            "Adventure Fiction"
+        ],
+        "publication": "2011",
+        "available": "true"
     }
 ]
