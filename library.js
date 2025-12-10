@@ -30,8 +30,8 @@ const browseTabPanel = tabPanels.find(
     (panel) => panel.getAttribute('aria-labelledby') === 'browse',
 );
 
-let deviceType = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile': 'Desktop'; //should be const
-//let deviceType = 'Mobile';
+//let deviceType = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile': 'Desktop'; //should be const
+let deviceType = 'Mobile';
 
 const searchBar = document.querySelector('.bookSearch');
 searchBar.style.display = "none";
@@ -417,6 +417,7 @@ function newUser(name, num=Math.random()*10000){
  * Finds all books that fit with the search bar input and then creates a card form them
  * then displays the cards on the search tab
  */
+//FIXME: Doesn't switch to the search page after enter is pressed or when search buttton is clicked
 function search(e){
     const searchString = searchBar.value;
     const searchDiv = searchTabPanel.querySelector('.cards');
@@ -428,7 +429,8 @@ function search(e){
     results.innerHTML = `<h2>Results for: ${searchString}</h2>`;
     for(let b = 0; b < books.length; b++ ){
         if(books[b].title.toLowerCase().includes(searchString.toLowerCase())){
-            // Add book images
+            console.log("found a book that matches");
+            //TODO: Add book images
             let code = `<div class="card">`;
             if(librarianCheck(books[b].title)){
                 code += `<div class="cornnerBanner">Librarian Pick</div>`;
@@ -456,7 +458,7 @@ function search(e){
     const searchTab = Array.from(tabs.querySelectorAll('[role="tab"]')).find(
         (tab) => tab.getAttribute('id') === 'search'
     );
-    searchTab.setAttribute('aria-selected', true);
+     
     // find the associated tabpanel and show it
     searchTabPanel.hidden = false;
 }
@@ -793,15 +795,6 @@ window.addEventListener('keydown', (e) => {
         }
         return;
     }
-    /*else if(e.code === "Space"){
-        e.preventDefault();
-        deviceType = 'Mobile'; //Temp
-        if(deviceType === 'Mobile'){
-            //sidePanel.hidden = !sidePanel.hidden;
-            setMobile();
-        }
-        return;
-    }*/
 });
 // When image clicked search
 searchButtonImage.addEventListener('click', search);
@@ -863,7 +856,7 @@ searchForm.addEventListener('submit', search);
 stackButton.addEventListener('click', function(e) {
     sidePanel.hidden = !sidePanel.hidden;
     console.log("button pressed");
-    //sidePanel.classList.add('open'); // trying to animate it
+    sidePanel.classList.add('open'); // trying to animate it
 });
 
 function formatArrayOutput(array){
